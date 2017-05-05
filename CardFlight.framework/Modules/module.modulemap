@@ -1,0 +1,6 @@
+framework module CardFlight {
+  umbrella header "CardFlight.h"
+
+  export *
+  module * { export * }
+}

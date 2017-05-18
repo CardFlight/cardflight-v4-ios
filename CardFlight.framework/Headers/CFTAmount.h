@@ -1,15 +1,21 @@
-//
-//  CFTAmount.h
-//  cardflight-sdk
-//
-//  Created by Adam Duflo on 12/7/16.
-//  Copyright © 2016 CardFlight. All rights reserved.
-//
+/*!
+ * @header CFTAmount.h
+ *
+ * @brief An Amount object is initialized with a number representing a US dollar amount to use. 
+ * All amounts will be rounded according to banker’s rounding if needed.
+ *
+ * @copyright 2017 CardFlight Inc. All rights reserved.
+ */
 
 #import <Foundation/Foundation.h>
 
 @interface CFTAmount : NSObject
 
+/*!
+ * @property decimalValue
+ * @brief Value the amount object is set to
+ * Added in 4.0
+ */
 @property (nonatomic, readonly, strong, nonnull) NSDecimalNumber *decimalValue;
 
 /*!

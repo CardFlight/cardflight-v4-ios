@@ -1,10 +1,11 @@
-//
-//  CFTTransaction.h
-//  cardflight-sdk
-//
-//  Created by Adam Duflo on 12/2/16.
-//  Copyright © 2016 CardFlight. All rights reserved.
-//
+/*!
+ * @header CFTTransaction.h
+ *
+ * @brief The Transaction object is used to process any charges you want to make. 
+ * It is the main point of interaction with the CardFlight SDK.
+ *
+ * @copyright 2017 CardFlight Inc. All rights reserved.
+ */
 
 #import <Foundation/Foundation.h>
 #import "CFTEnum.h"
@@ -21,8 +22,18 @@
 
 @interface CFTTransaction : NSObject
 
+/*!
+ * @property delegate
+ * @brief Delegate to receive callbacks during a transaction
+ * Added in 4.0
+ */
 @property (nonatomic, readwrite, weak, nullable) id <CFTTransactionDelegate> delegate;
 
+/*!
+ * @property transactionParameters
+ * @brief Transaction Parameters used by the Transaction
+ * Added in 4.0
+ */
 @property (nonatomic, readonly, strong, nullable) CFTTransactionParameters *transactionParameters;
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
@@ -218,8 +229,8 @@ NS_SWIFT_NAME(transaction(_:didRequest:));
  * from a transaction in the CFTTransactionStateCompleted state.
  * Added in 4.0
  */
-- (void)transaction:(nonnull CFTTransaction *)transaction didFinishWithHistoricalTransaction:(nonnull CFTHistoricalTransaction *)historicalTransaction
-NS_SWIFT_NAME(transaction(_:didFinish:));
+- (void)transaction:(nonnull CFTTransaction *)transaction didCompleteWithHistoricalTransaction:(nonnull CFTHistoricalTransaction *)historicalTransaction
+NS_SWIFT_NAME(transaction(_:didComplete:));
 
 @optional
 

@@ -1,10 +1,10 @@
-//
-//  CFTConstants.h
-//  cardflight-sdk
-//
-//  Created by Paul Tower on 10/17/16.
-//  Copyright © 2016 CardFlight. All rights reserved.
-//
+/*!
+ * @header CFTConstants.h
+ *
+ * @brief Constants used by the SDK
+ *
+ * @copyright 2017 CardFlight Inc. All rights reserved.
+ */
 
 #import <Foundation/Foundation.h>
 

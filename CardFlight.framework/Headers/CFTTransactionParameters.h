@@ -1,10 +1,11 @@
-//
-//  CFTTransactionParameters.h
-//  cardflight-sdk
-//
-//  Created by Paul Tower on 11/8/16.
-//  Copyright © 2016 CardFlight. All rights reserved.
-//
+/*!
+ * @header CFTTransactionParameters.h
+ *
+ * @brief Handles the parameters set on an individual transaction
+ * Required to start a transaction.
+ *
+ * @copyright 2017 CardFlight Inc. All rights reserved.
+ */
 
 #import <Foundation/Foundation.h>
 
@@ -13,16 +14,41 @@
 
 @interface CFTTransactionParameters : NSObject
 
+/*!
+ * @property amount
+ * @brief Amount to process
+ * Added in 4.0
+ */
 @property (nonatomic, readonly, strong, nonnull) CFTAmount *amount;
+
+/*!
+ * @propert credentials
+ * @brief Credentials to use for processing
+ * Added in 4.0
+ */
 @property (nonatomic, readonly, strong, nonnull) CFTCredentials *credentials;
+
+/*!
+ * @property callbackUrl
+ * @brief If a callback url is specified, the CardFlight Gateway will provide that url with all transaction details.
+ * Added in 4.0
+ */
 @property (nonatomic, readwrite, strong, nullable) NSURL *callbackUrl;
 
 /*!
  * @property requireSignature
- * @brief Used by keyed or swiped transactions. EMV transactions determine
- * the requirement of signature independently.
+ * @brief The boolean for requesting a signature is only honored for keyed and swiped transactions. 
+ * The CardFlight Gateway decides whether to request a signature for all other card input methods used.
+ * Added in 4.0
  */
 @property (nonatomic, readwrite, assign) BOOL requireSignature;
+
+/*!
+ * @property metadata
+ * @brief The metadata hash is used to store any additional information with a Transaction on the CardFlight Gateway.
+ * This data will also be sent to the callback url if one was provided.
+ * Added in 4.0
+ */
 @property (nonatomic, readwrite, strong, nullable) NSDictionary *metadata;
 
 /*!

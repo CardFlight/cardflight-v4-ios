@@ -1,10 +1,10 @@
-//
-//  CardFlight.h
-//  CardFlight
-//
-//  Created by Paul Tower on 3/15/17.
-//  Copyright © 2017 CardFlight Inc. All rights reserved.
-//
+/*!
+ * @header CardFlight.h
+ *
+ * @brief Combined header for all public SDK headers
+ *
+ * @copyright 2017 CardFlight Inc. All rights reserved.
+ */
 
 #import <CardFlight/CFTEnum.h>
 #import <CardFlight/CFTConstants.h>
@@ -24,7 +24,3 @@
 
 //! Project version string for CardFlight.
 //FOUNDATION_EXPORT const unsigned char CardFlightVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <CardFlight/PublicHeader.h>
-
-

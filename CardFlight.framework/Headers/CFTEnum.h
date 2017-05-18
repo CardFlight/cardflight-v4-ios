@@ -1,10 +1,10 @@
-//
-//  CFTEnum.h
-//  cardflight-sdk
-//
-//  Created by Paul Tower on 10/7/16.
-//  Copyright © 2016 CardFlight. All rights reserved.
-//
+/*!
+ * @header CFTEnum.h
+ *
+ * @brief Enumerations used with the SDK
+ *
+ * @copyright 2017 CardFlight Inc. All rights reserved.
+ */
 
 #import <Foundation/Foundation.h>
 

@@ -1,11 +1,9 @@
-/*
- *****************************************************************
- * CFTLogger.h
+/*!
+ * @header CFTLogger.h
  *
- * Use this class to request for the SDK to log events.
+ * @brief Handles routing of logging debug messages
  *
- * Copyright (c) 2016 CardFlight Inc. All rights reserved.
- *****************************************************************
+ * @copyright 2017 CardFlight Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>

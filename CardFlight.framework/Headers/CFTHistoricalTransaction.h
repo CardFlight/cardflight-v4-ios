@@ -1,10 +1,11 @@
-//
-//  CFTHistoricalTransaction.h
-//  cardflight-sdk
-//
-//  Created by Paul Tower on 11/7/16.
-//  Copyright © 2016 CardFlight. All rights reserved.
-//
+/*!
+ * @header CFTHistoricalTransaction.h
+ *
+ * @brief The Historical Transaction object is created (usually by a Transaction object) 
+ * to represent the record of a past transaction.
+ *
+ * @copyright 2017 CardFlight Inc. All rights reserved.
+ */
 
 #import <Foundation/Foundation.h>
 #import "CFTEnum.h"
@@ -17,16 +18,81 @@
 
 @interface CFTHistoricalTransaction : NSObject
 
+/*!
+ * @property uuid
+ * @brief UUID of the Transaction
+ * Added in 4.0
+ */
 @property (nonatomic, readonly, strong, nullable) NSUUID *uuid;
+
+/*!
+ * @property createdAt
+ * @brief Date when the Transaction was created
+ * Added in 4.0
+ */
 @property (nonatomic, readonly, strong, nonnull) NSDate *createdAt;
+
+/*!
+ * @property result
+ * @brief Result of the Transaction
+ * Added in 4.0
+ */
 @property (nonatomic, readonly, assign) CFTTransactionResult result;
+
+/*!
+ * @property declineMessage
+ * @brief Decline message (Only populated if the result was declined)
+ * Added in 4.0
+ */
 @property (nonatomic, readonly, copy, nullable) NSString *declineMessage;
+
+/*!
+ * @property error
+ * @brief Error that occurred (Only populated if the result was errored)
+ * Added in 4.0
+ */
 @property (nonatomic, readonly, strong, nullable) NSError *error;
+
+/*!
+ * @property signatureUrl
+ * @brief URL of the signature data
+ * Added in 4.0
+ */
 @property (nonatomic, readonly, strong, nullable) NSURL *signatureUrl;
+
+/*!
+ * @property cardReaderInfo
+ * @brief Card Reader Info used by the Transaction
+ * Added in 4.0
+ */
 @property (nonatomic, readonly, strong, nullable) CFTCardReaderInfo *cardReaderInfo;
+
+/*!
+ * @property cardInfo
+ * @brief Card Info used by the Transaction
+ * Added in 4.0
+ */
 @property (nonatomic, readonly, strong, nullable) CFTCardInfo *cardInfo;
+
+/*!
+ * @property transactedAt
+ * @brief Date when the Transaction was processed
+ * Added in 4.0
+ */
 @property (nonatomic, readonly, strong, nullable) NSDate *transactedAt;
+
+/*!
+ * @property transactionParameters
+ * @brief Transaction Parameters used by the Transaction
+ * Added in 4.0
+ */
 @property (nonatomic, readonly, strong, nullable) CFTTransactionParameters *transactionParameters;
+
+/*!
+ * @property transactionType
+ * @brief Type of Transaction
+ * Added in 4.0
+ */
 @property (nonatomic, readonly, assign) CFTTransactionType transactionType;
 
 /*!

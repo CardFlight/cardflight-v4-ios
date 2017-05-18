@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                      = 'CardFlight-v4'
-  s.version                   = '4.0.0-rc.1'
+  s.version                   = '4.0'
   s.summary                   = 'CardFlight mobile payments SDK'
 
   s.description               = <<-DESC

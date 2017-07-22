@@ -82,6 +82,13 @@
 @property (nonatomic, readonly, strong, nullable) NSDate *transactedAt;
 
 /*!
+ # @property referenceID
+ * @brief Reference number of the transaction
+ * Added in 4.0.1
+ */
+@property (nonatomic, readonly, copy, nullable) NSString *referenceID;
+
+/*!
  * @property transactionParameters
  * @brief Transaction Parameters used by the Transaction
  * Added in 4.0

@@ -18,9 +18,4 @@
 #import <CardFlight/CFTCardAID.h>
 #import <CardFlight/CFTAmount.h>
 #import <CardFlight/CFTKeyedEntryView.h>
-
-//! Project version number for CardFlight.
-//FOUNDATION_EXPORT double CardFlightVersionNumber;
-
-//! Project version string for CardFlight.
-//FOUNDATION_EXPORT const unsigned char CardFlightVersionString[];
+#import <CardFlight/CFTInfo.h>

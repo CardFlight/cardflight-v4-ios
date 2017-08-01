@@ -1,3 +1,7 @@
+### 4.0.2
+* Fixed
+  * referenceId on approved transactions
+
 ### 4.0.1
 * Added
   * referenceId to CFTHistoricalTransaction

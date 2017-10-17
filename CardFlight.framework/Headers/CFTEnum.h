@@ -50,6 +50,7 @@ typedef NS_ENUM(NSInteger, CFTTransactionState) {
  * @constant CFTCardReaderEventUpdateStarted The reader started updating
  * @constant CFTCardReaderEventUpdateCompleted The reader completed updating
  * @constant CFTCardReaderEventAudioRecordingPermissionNotGranted Audio recording permissions were not granted
+ * @constant CFTCardReaderEventFatalError Reader encountered a fatal error
  * @discussion Specifies the events pertaining to the card reader
  * Added in 4.0
  */
@@ -67,7 +68,10 @@ typedef NS_ENUM(NSInteger, CFTCardReaderEvent) {
     CFTCardReaderEventCardTapErrored NS_SWIFT_NAME(cardTapErrored) = 10,
     CFTCardReaderEventUpdateStarted NS_SWIFT_NAME(updateStarted) = 11,
     CFTCardReaderEventUpdateCompleted NS_SWIFT_NAME(updateCompleted) = 12,
-    CFTCardReaderEventAudioRecordingPermissionNotGranted NS_SWIFT_NAME(audioRecordingPermissionNotGranted) = 13
+    CFTCardReaderEventAudioRecordingPermissionNotGranted NS_SWIFT_NAME(audioRecordingPermissionNotGranted) = 13,
+    CFTCardReaderEventFatalError NS_SWIFT_NAME(fatalError) = 14,
+    CFTCardReaderEventConnecting NS_SWIFT_NAME(connecting) = 15,
+    CFTCardReaderEventBatteryStatusUpdated NS_SWIFT_NAME(batteryStatusUpdated) = 16
 };
 
 /*!
@@ -94,6 +98,7 @@ typedef NS_ENUM(NSInteger, CFTKeyedEntryEvent) {
  * @constant CFTCardInputMethodDip Card info generated from dipped data
  * @constant CFTCardInputMethodTap Card info generated from NFC tapped data
  * @constant CFTCardInputMethodSwipeFallback Card info generated from a swipe following failed dip attempts
+ * @constant CFTCardInputMethodQuickChip Card info generated from quick chip data
  * @discussion Specifies the method by which card info was generated
  * Added in 4.0
  */
@@ -103,7 +108,8 @@ typedef NS_ENUM(NSInteger, CFTCardInputMethod) {
     CFTCardInputMethodSwipe NS_SWIFT_NAME(swipe) = 2,
     CFTCardInputMethodDip NS_SWIFT_NAME(dip) = 3,
     CFTCardInputMethodTap NS_SWIFT_NAME(tap) = 4,
-    CFTCardInputMethodSwipeFallback NS_SWIFT_NAME(swipeFallback) = 5
+    CFTCardInputMethodSwipeFallback NS_SWIFT_NAME(swipeFallback) = 5,
+    CFTCardInputMethodQuickChip NS_SWIFT_NAME(quickChip) = 6
 };
 
 /*!
@@ -146,8 +152,9 @@ typedef NS_ENUM(NSInteger, CFTCVM) {
  * @constant CFTTransactionResultDeclined Transaction was declined online
  * @constant CFTTransactionResultErrored Transaction encountered an error
  * @constant CFTTransactionResultAborted Transaction was cancelled before processing
+ * @constant CFTTransactionResultVoided Transaction was voided before it batched out
  * @discussion The final outcome of a transaction
- * Added in 4.0
+ * Updated in 4.1
  */
 typedef NS_ENUM(NSInteger, CFTTransactionResult) {
     CFTTransactionResultUnknown NS_SWIFT_NAME(unknown) = 0,
@@ -155,6 +162,7 @@ typedef NS_ENUM(NSInteger, CFTTransactionResult) {
     CFTTransactionResultDeclined NS_SWIFT_NAME(declined) = 2,
     CFTTransactionResultErrored NS_SWIFT_NAME(errored) = 3,
     CFTTransactionResultAborted NS_SWIFT_NAME(aborted) = 4,
+    CFTTransactionResultVoided NS_SWIFT_NAME(voided) = 5
 };
 
 /*!
@@ -163,17 +171,16 @@ typedef NS_ENUM(NSInteger, CFTTransactionResult) {
  * @constant CFTTransactionTypeUnknown Unknown type, should not occur in normal operation
  * @constant CFTTransactionTypeSale Standard sale
  * @constant CFTTransactionTypeRefund A refunded sale
- * @constant CFTTransactionTypeVoid A cancelled sale or refund
  * @constant CFTTransactionTypeAuthorization An authorized but not yet captured transaction
  * @discussion Valid types of transactions that can be performed
- * Added in 4.0
+ * Updated in 4.1
  */
 typedef NS_ENUM(NSInteger, CFTTransactionType) {
     CFTTransactionTypeUnknown NS_SWIFT_NAME(unknown) = 0,
     CFTTransactionTypeSale NS_SWIFT_NAME(sale) = 1,
     CFTTransactionTypeRefund NS_SWIFT_NAME(refund) = 2,
-    CFTTransactionTypeVoid NS_SWIFT_NAME(void) = 3,
-    CFTTransactionTypeAuthorization NS_SWIFT_NAME(authorization) = 4
+    CFTTransactionTypeAuthorization NS_SWIFT_NAME(authorization) = 3,
+    CFTTransactionTypeTokenization NS_SWIFT_NAME(tokenization) = 4
 };
 
 /*!
@@ -217,6 +224,23 @@ typedef NS_ENUM(NSInteger, CFTCardBrand) {
     CFTCardBrandUATP NS_SWIFT_NAME(UATP) = 13,
     CFTCardBrandVerve NS_SWIFT_NAME(verve) = 14,
     CFTCardBrandCardGuard NS_SWIFT_NAME(cardguard) = 15
+};
+
+/*
+ * @typedef CFTReachability
+ * @brief Set network reachability for the current transaction
+ * @constant CFTReachabilityUnknown Current reachability is unknown
+ * @constant CFTReachabilityFull Full network access
+ * @constant CFTReachabilityRestricted Limited network access
+ * @discussion Reachability is set per-transaction and if it is set to resticted
+ * EMV transactions will not be permitted in order to ensure the transaction
+ * will be able to be deferred
+ * Added in 4.1
+ */
+typedef NS_ENUM(NSInteger, CFTReachability) {
+    CFTReachabilityUnknown NS_SWIFT_NAME(unknown) = 0,
+    CFTReachabilityFull NS_SWIFT_NAME(full) = 1,
+    CFTReachabilityRestricted NS_SWIFT_NAME(restricted) = 2
 };
 
 /*!

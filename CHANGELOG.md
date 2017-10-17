@@ -1,3 +1,16 @@
+### 4.1.0
+* Added
+  * Tokenization support
+  * Reachability support
+  * Defer and Resume transaction
+  * Card Reader Connecting events
+  * Card Reader Battery events
+  * Strip architectures script (for App Store uploading)
+* Changed
+  * Transaction messaging format
+* Fixed
+  * Unsupported AID handling
+
 ### 4.0.3
 * Fixed
   * referenceID crash on transactions

@@ -7,7 +7,7 @@
  * @copyright 2017 CardFlight Inc. All rights reserved.
  */
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "CFTEnum.h"
 #import "CFTConstants.h"
 
@@ -17,6 +17,7 @@
 @class CFTTransactionParameters;
 @class CFTAmount;
 @class CFTKeyedEntryView;
+@class CFTMessage;
 
 @protocol CFTTransactionDelegate;
 
@@ -35,6 +36,13 @@
  * Added in 4.0
  */
 @property (nonatomic, readonly, strong, nullable) CFTTransactionParameters *transactionParameters;
+
+/*!
+ * @property reachability
+ * @brief Current reachability of the transaction
+ * Added in 4.1
+ */
+@property (nonatomic, readonly) CFTReachability reachability;
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 + (nonnull instancetype)new NS_UNAVAILABLE;
@@ -73,6 +81,16 @@ NS_SWIFT_NAME(resumeDeferredTransaction(transactionData:delegate:));
 NS_SWIFT_NAME(init(delegate:));
 
 /*!
+ * @brief Update the reachability of the transaction
+ * @param reachability CFTReachability
+ * @discussion Updates the reachability for the transaction. New
+ * transactions default to CFTReachabilityFull
+ * Added in 4.1
+ */
+- (void)updateReachability:(CFTReachability)reachability
+NS_SWIFT_NAME(update(reachability:));
+
+/*!
  * @brief Scan for compatible Bluetooth card readers
  * @discussion Initiates a scan for compatible Bluetooth card readers
  * Added in 4.0
@@ -87,7 +105,7 @@ NS_SWIFT_NAME(scanBluetoothCardReaders());
  * @discussion Will connect with the supplied reader.
  * Added in 4.0
  */
-- (void)selectCardReaderInfo:(nullable CFTCardReaderInfo *)cardReaderInfo
+- (void)selectCardReaderInfo:(nonnull CFTCardReaderInfo *)cardReaderInfo
              cardReaderModel:(CFTCardReaderModel)cardReaderModel
 NS_SWIFT_NAME(select(cardReaderInfo:cardReaderModel:));
 
@@ -112,8 +130,8 @@ NS_SWIFT_NAME(useKeyedCardInfo());
 /*!
  * @brief Attempt to begin a sale for an amount
  * @param transactionParameters CFTTransactionParameters - TransactionParameters used for sale
- * @discussion Will attempt to begin a sale. If the state is not CFTInternalTransactionStateReady,
- * an error will pass through the transactionDidUpdateState:error: callback.
+ * @discussion Will attempt to begin a sale. If the state is not CFTTransactionStatePendingTransactionParameters,
+ * the transactionDidUpdateState:error callback will respond with an error.
  * Added in 4.0
  */
 - (void)beginSaleWithTransactionParameters:(nonnull CFTTransactionParameters *)transactionParameters
@@ -122,12 +140,22 @@ NS_SWIFT_NAME(beginSale(transactionParameters:));
 /*!
  * @brief Attempt to authorize an amount
  * @param transactionParameters CFTTransactionParameters - TransactionParameters used for authorization
- * @discussion Will attempt to begin an authorization. If the state is not CFTInternalTransactionStateReady
- * , an error will pass through the transactionDidUpdateState:error: callback.
+ * @discussion Will attempt to begin an authorization. If the state is not CFTTransactionStatePendingTransactionParameters,
+ * the transactionDidUpdateState:error callback will respond with an error.
  * Added in 4.0
  */
 - (void)beginAuthorizationWithTransactionParameters:(nonnull CFTTransactionParameters *)transactionParameters
 NS_SWIFT_NAME(beginAuthorization(transactionParameters:));
+
+/*!
+ * @brief Attempt to tokenize a card
+ * @param transactionParameters CFTTransactionParameters - TransactionParameters used for tokenize
+ * @discussion Will attempt to begin the process of tokenizing. If the state is not CFTTransactionStatePendingTransactionParameters,
+ * the transactionDidUpdateState:error callback will respond with an error.
+ * Added in 4.1
+ */
+- (void)beginTokenizingWithTransactionParameters:(nonnull CFTTransactionParameters *)transactionParameters
+NS_SWIFT_NAME(beginTokenizing(transactionParameters:));
 
 /*!
  * @brief Select a CFTCardAID to use for the transaction
@@ -141,23 +169,32 @@ NS_SWIFT_NAME(select(cardAid:));
 /*!
  * @brief Specify how to process the transaction
  * @param processOption CFTProcessOption
- * @discussion Will attempt to use the process option for transaction continuation. If the state
- * is not CFTInternalTransactionStatePendingProcessOption, an error will pass through the
- * transactionDidUpdateState:error: callback.
+ * @discussion Will attempt to use the process option for transaction continuation. If the state is not
+ * CFTTransactionStatePendingProcessOption, the transactionDidUpdateState:error callback will respond with an error.
  * Added in 4.0
  */
 - (void)selectProcessOption:(CFTProcessOption)processOption
 NS_SWIFT_NAME(select(processOption:));
 
 /*!
- * @brief Attach card holder verification data
- * @param cvmData NSData
- * @discussion Will attempt to attach card holder verification. If the state is not
- * CFTInternalTransactionStatePendingCVM, an error will pass through the transactionDidUpdateState:error: callback.
- * Added in 4.0
+ * @brief Attach signature CVM to transaction
+ * @param signatureImage png of signature to be attached
+ * @discussion Will attempt to attach signature. If the state is not
+ * CFTTransactionStateCompleted, the transactionDidUpdateState:error callback will respond with an error.
+ * Added in 4.1
  */
-- (void)attachCvmData:(nullable NSData *)cvmData
-NS_SWIFT_NAME(attach(cvmData:));
+- (void)attachSignature:(nullable UIImage *)signatureImage
+NS_SWIFT_NAME(attach(signature:));
+
+/*!
+ * @brief Private method
+ * @param parameter1 id - First parameter of the method
+ * @param parameter2 id - Second parameter of the method
+ * @discussion This is only to be used by clients who have made arrangements with CardFlight
+ * Added in 4.1
+ */
+- (void)privateFunctionOne:(nullable id)parameter1 withParameter2:(nullable id)parameter2
+NS_SWIFT_NAME(privateFunctionOne(_:with:));
 
 @end
 
@@ -184,7 +221,7 @@ NS_SWIFT_NAME(transaction(_:didUpdate:error:));
  * @discussion Required callback containing a message to be displayed to users.
  * Added in 4.0
  */
-- (void)transaction:(nonnull CFTTransaction *)transaction didRequestDisplayMessage:(nonnull NSString *)message
+- (void)transaction:(nonnull CFTTransaction *)transaction didRequestDisplayMessages:(nonnull CFTMessage *)message
 NS_SWIFT_NAME(transaction(_:didRequestDisplay:));
 
 /*!
@@ -289,5 +326,19 @@ NS_SWIFT_NAME(transaction(_:didUpdate:));
  */
 - (void)transaction:(nonnull CFTTransaction *)transaction didRequestCardAidSelection:(nonnull NSArray<CFTCardAID *> *)cardAidArray
 NS_SWIFT_NAME(transaction(_:didRequestCardAidSelection:));
+
+// ******************** DEPRECATED ********************
+
+/*!
+ * @deprecated Deprecated in Version 4.1
+ * @note Please use @code transaction:didRequestDisplayMessages: @endcode instead
+ * @brief A message to display to users
+ * @param transaction CFTTransaction
+ * @param message NSString
+ * @discussion Required callback containing a message to be displayed to users.
+ * Deprecated in 4.1
+ */
+- (void)transaction:(nonnull CFTTransaction *)transaction didRequestDisplayMessage:(nonnull NSString *)message
+NS_SWIFT_NAME(transaction(_:didRequestDisplay:)) __attribute__((deprecated));
 
 @end

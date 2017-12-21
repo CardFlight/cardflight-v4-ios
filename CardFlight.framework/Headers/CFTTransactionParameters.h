@@ -17,21 +17,21 @@
 /*!
  * @property amount
  * @brief Amount to process
- * Added in 4.0
+ * Added in 4.0.0
  */
 @property (nonatomic, readonly, strong, nonnull) CFTAmount *amount;
 
 /*!
  * @propert credentials
  * @brief Credentials to use for processing
- * Added in 4.0
+ * Added in 4.0.0
  */
 @property (nonatomic, readonly, strong, nonnull) CFTCredentials *credentials;
 
 /*!
  * @property callbackUrl
  * @brief If a callback url is specified, the CardFlight Gateway will provide that url with all transaction details.
- * Added in 4.0
+ * Added in 4.0.0
  */
 @property (nonatomic, readwrite, strong, nullable) NSURL *callbackUrl;
 
@@ -39,7 +39,7 @@
  * @property requireSignature
  * @brief The boolean for requesting a signature is only honored for keyed and swiped transactions. 
  * The CardFlight Gateway decides whether to request a signature for all other card input methods used.
- * Added in 4.0
+ * Added in 4.0.0
  */
 @property (nonatomic, readwrite, assign) BOOL requireSignature;
 
@@ -47,7 +47,7 @@
  * @property metadata
  * @brief The metadata hash is used to store any additional information with a Transaction on the CardFlight Gateway.
  * This data will also be sent to the callback url if one was provided.
- * Added in 4.0
+ * Added in 4.0.0
  */
 @property (nonatomic, readwrite, strong, nullable) NSDictionary *metadata;
 
@@ -57,7 +57,7 @@
  * @param credentials CFTCredentials
  * @return CFTTransactionParameters - The initalized CFTTransactionParameters object
  * @discussion Will construct a new CFTTransactionParameters object using amount provided.
- * Added in 4.0
+ * Added in 4.0.0
  */
 + (nonnull instancetype)parametersWithAmount:(nonnull CFTAmount *)amount
                                  credentials:(nonnull CFTCredentials *)credentials;
@@ -68,7 +68,7 @@
  * @param credentials CFTCredentials
  * @return CFTTransactionParameters - The initalized CFTTransactionParameters object
  * @discussion Will construct a new CFTTransactionParameters object using amount provided.
- * Added in 4.0
+ * Added in 4.0.0
  */
 - (nonnull instancetype)initWithAmount:(nonnull CFTAmount *)amount
                            credentials:(nonnull CFTCredentials *)credentials

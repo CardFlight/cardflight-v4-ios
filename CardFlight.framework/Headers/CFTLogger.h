@@ -17,7 +17,7 @@
  * @param output NSString - The log message
  * @discussion Optional callback to reroute logging messages to a
  * file instead of to the console.
- * Added in 4.0
+ * Added in 4.0.0
  */
 - (void)loggerOutput:(nonnull NSString *)output;
 
@@ -30,7 +30,7 @@
 /*!
  * @brief Accessor for the logger singleton
  * @discussion Access the logger singleton
- * Added in 4.0
+ * Added in 4.0.0
  */
 + (nonnull CFTLogger *)sharedLogger;
 
@@ -38,7 +38,7 @@
  * @brief Set logging mode of the SDK
  * @param logging BOOL to turn on or off logging mode
  * @discussion Pass YES to enable developer logging mode to the console.
- * Added in 4.0
+ * Added in 4.0.0
  */
 - (void)setLogging:(BOOL)logging;
 

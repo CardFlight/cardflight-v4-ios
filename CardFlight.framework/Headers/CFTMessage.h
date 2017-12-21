@@ -13,14 +13,14 @@
 /*!
  * @property primary
  * @brief High priority message, should be displayed to the user
- * Added in 4.1
+ * Added in 4.1.0
  */
 @property (nonatomic, readonly, copy, nullable) NSString *primary;
 
 /*!
  * @property secondary
  * @brief Lower priority message, should be displayed to the user
- * Added in 4.1
+ * Added in 4.1.0
  */
 @property (nonatomic, readonly, copy, nullable) NSString *secondary;
 

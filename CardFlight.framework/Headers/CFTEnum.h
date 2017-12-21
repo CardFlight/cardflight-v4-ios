@@ -21,7 +21,7 @@
  * @discussion Current public state of the transaction
  * Most transactions will proceed through all 5 states in linear order.
  * The current state can be used to determine the flow of control in the host application.
- * Added in 4.0
+ * Added in 4.0.0
  */
 typedef NS_ENUM(NSInteger, CFTTransactionState) {
     CFTTransactionStateUnknown NS_SWIFT_NAME(unknown) = 0,
@@ -52,7 +52,7 @@ typedef NS_ENUM(NSInteger, CFTTransactionState) {
  * @constant CFTCardReaderEventAudioRecordingPermissionNotGranted Audio recording permissions were not granted
  * @constant CFTCardReaderEventFatalError Reader encountered a fatal error
  * @discussion Specifies the events pertaining to the card reader
- * Added in 4.0
+ * Added in 4.0.0
  */
 typedef NS_ENUM(NSInteger, CFTCardReaderEvent) {
     CFTCardReaderEventUnknown NS_SWIFT_NAME(unknown) = 0,
@@ -81,7 +81,7 @@ typedef NS_ENUM(NSInteger, CFTCardReaderEvent) {
  * @constant CFTKeyedEntryEventCardIncomplete The card information provided is not yet complete
  * @constant CFTKeyedEntryEventCardComplete The card information provided has completed card number, expiration date, and CVV value
  * @discussion Specifies whether or not complete key entered card information was provided
- * Added in 4.0
+ * Added in 4.0.0
  */
 typedef NS_ENUM(NSInteger, CFTKeyedEntryEvent) {
     CFTKeyedEntryEventUnknown NS_SWIFT_NAME(unknown) = 0,
@@ -100,7 +100,7 @@ typedef NS_ENUM(NSInteger, CFTKeyedEntryEvent) {
  * @constant CFTCardInputMethodSwipeFallback Card info generated from a swipe following failed dip attempts
  * @constant CFTCardInputMethodQuickChip Card info generated from quick chip data
  * @discussion Specifies the method by which card info was generated
- * Added in 4.0
+ * Added in 4.0.0
  */
 typedef NS_ENUM(NSInteger, CFTCardInputMethod) {
     CFTCardInputMethodUnknown NS_SWIFT_NAME(unknown) = 0,
@@ -120,7 +120,7 @@ typedef NS_ENUM(NSInteger, CFTCardInputMethod) {
  * @constant CFTProcessOptionDefer Save the transaction to process at a later date
  * @constant CFTProcessOptionAbort Cancel the transaction without processing
  * @discussion Transactions can either be processed online, saved for later processing, or canceled without processing.
- * Added in 4.0
+ * Added in 4.0.0
  */
 typedef NS_ENUM(NSInteger, CFTProcessOption) {
     CFTProcessOptionUnknown NS_SWIFT_NAME(unknown) = 0,
@@ -136,7 +136,7 @@ typedef NS_ENUM(NSInteger, CFTProcessOption) {
  * @constant CFTCVMNone No CVM requested
  * @constant CFTCVMSignature Signature CVM requested
  * @discussion All currently supported cardholder verification methods
- * Added in 4.0
+ * Added in 4.0.0
  */
 typedef NS_ENUM(NSInteger, CFTCVM) {
     CFTCVMUnknown NS_SWIFT_NAME(unknown) = 0,
@@ -154,7 +154,7 @@ typedef NS_ENUM(NSInteger, CFTCVM) {
  * @constant CFTTransactionResultAborted Transaction was cancelled before processing
  * @constant CFTTransactionResultVoided Transaction was voided before it batched out
  * @discussion The final outcome of a transaction
- * Updated in 4.1
+ * Updated in 4.1.0
  */
 typedef NS_ENUM(NSInteger, CFTTransactionResult) {
     CFTTransactionResultUnknown NS_SWIFT_NAME(unknown) = 0,
@@ -173,7 +173,7 @@ typedef NS_ENUM(NSInteger, CFTTransactionResult) {
  * @constant CFTTransactionTypeRefund A refunded sale
  * @constant CFTTransactionTypeAuthorization An authorized but not yet captured transaction
  * @discussion Valid types of transactions that can be performed
- * Updated in 4.1
+ * Updated in 4.1.0
  */
 typedef NS_ENUM(NSInteger, CFTTransactionType) {
     CFTTransactionTypeUnknown NS_SWIFT_NAME(unknown) = 0,
@@ -181,6 +181,34 @@ typedef NS_ENUM(NSInteger, CFTTransactionType) {
     CFTTransactionTypeRefund NS_SWIFT_NAME(refund) = 2,
     CFTTransactionTypeAuthorization NS_SWIFT_NAME(authorization) = 3,
     CFTTransactionTypeTokenization NS_SWIFT_NAME(tokenization) = 4
+};
+
+/*!
+ * @typedef CFTApiTransactionStatus
+ * @bried The current status of the historical transaction
+ * @constant CFTTransactionTypeUnknown Unknown state. An error has occurred.
+ * @constant CFTHistoricalTransactionStatusPendingPreApproved Authorization requested, awaiting result.
+ * @constant CFTHistoricalTransactionStatusPreApproved Authorization approved, cardholder statement shows funds as `PENDING`.
+ * @constant CFTHistoricalTransactionStatusPendingApproved Sale, Capture, or Refund requested, awaiting result.
+ * @constant CFTHistoricalTransactionStatusApproved Sale, Capture, or Refund approved, funds to be moved between merchant and cardholder.
+ * @constant CFTHistoricalTransactionStatusPendingVoid Void requested, awaiting result.
+ * @constant CFTHistoricalTransactionStatusVoided Transaction voided, funds are released to cardholder and no money is moved.
+ * @constant CFTHistoricalTransactionStatusDeclined Authorization, Sale, or Refund request declined.
+ * @constant CFTHistoricalTransactionStatusSettled Capture, Sale, or Refund settled.
+ * @discussion This status mirrors the transaction status available from the Cardflight API
+ * Added in 4.1.0
+ */
+typedef NS_ENUM(NSInteger, CFTApiTransactionStatus) {
+    CFTHistoricalTransactionStatusUnknown NS_SWIFT_NAME(unknown) = 0,
+    CFTHistoricalTransactionStatusPendingPreApproved NS_SWIFT_NAME(pendingPreApproved) = 1,
+    CFTHistoricalTransactionStatusPreApproved NS_SWIFT_NAME(preApproved) = 2,
+    CFTHistoricalTransactionStatusPendingApproved NS_SWIFT_NAME(pendingApproved) = 3,
+    CFTHistoricalTransactionStatusApproved NS_SWIFT_NAME(approved) = 4,
+    CFTHistoricalTransactionStatusPendingVoid NS_SWIFT_NAME(pendingVoid) = 5,
+    CFTHistoricalTransactionStatusVoided NS_SWIFT_NAME(voided) = 6,
+    CFTHistoricalTransactionStatusDeclined NS_SWIFT_NAME(declined) = 7,
+    CFTHistoricalTransactionStatusSettled NS_SWIFT_NAME(settled) = 8
+    
 };
 
 /*!
@@ -205,7 +233,7 @@ typedef NS_ENUM(NSInteger, CFTTransactionType) {
  * @discussion All card brands recognized by the SDK. Not all recognized cards
  * are supported for running transactions. Credit card numbers starting within the
  * specified range are considered part of that card brand
- * Added in 4.0
+ * Added in 4.0.0
  */
 typedef NS_ENUM(NSInteger, CFTCardBrand) {
     CFTCardBrandUnknown NS_SWIFT_NAME(unknown) = 0,
@@ -235,7 +263,7 @@ typedef NS_ENUM(NSInteger, CFTCardBrand) {
  * @discussion Reachability is set per-transaction and if it is set to resticted
  * EMV transactions will not be permitted in order to ensure the transaction
  * will be able to be deferred
- * Added in 4.1
+ * Added in 4.1.0
  */
 typedef NS_ENUM(NSInteger, CFTReachability) {
     CFTReachabilityUnknown NS_SWIFT_NAME(unknown) = 0,
@@ -257,7 +285,7 @@ typedef NS_ENUM(NSInteger, CFTReachability) {
  * @constant CFTCardReaderModelB200 Bluetooth, swipe and dip
  * @constant CFTCardReaderModelB250 Bluetooth, swipe, dip, and tap
  * @discussion All compatible card readers, with their interface and supported input methods
- * Added in 4.0
+ * Added in 4.0.0
  */
 typedef NS_ENUM(NSInteger, CFTCardReaderModel) {
     CFTCardReaderModelUnknown NS_SWIFT_NAME(unknown) = 0,
@@ -280,7 +308,7 @@ typedef NS_ENUM(NSInteger, CFTCardReaderModel) {
  * @constant CFTBatteryStatusNominal Sufficent battery to run transactions
  * @constant CFTBatteryStatusPluggedIn Card reader running off AC power
  * @discussion Status of battery in card readers that contain a rechargable battery
- * Added in 4.0
+ * Added in 4.0.0
  */
 typedef NS_ENUM(NSInteger, CFTBatteryStatus) {
     CFTBatteryStatusUnknown NS_SWIFT_NAME(unknown) = 0,
@@ -292,13 +320,38 @@ typedef NS_ENUM(NSInteger, CFTBatteryStatus) {
 /*!
  * @typedef CFTCardReaderType
  * @brief Card reader type
- * @constant CFTCardReaderTypeUnknown Uknown reader
+ * @constant CFTCardReaderTypeUnknown Unknown reader
  * @constant CFTCardReaderTypeAudioJack Audio jack reader type
  * @constant CFTCardReaderTypeBluetooth Bluetooth reader type
- * @discussion Added in 4.0
+ * @discussion Added in 4.0.0
  */
 typedef NS_ENUM(NSInteger, CFTCardReaderType) {
     CFTCardReaderTypeUnknown NS_SWIFT_NAME(unknown) = 0,
     CFTCardReaderTypeAudioJack NS_SWIFT_NAME(audioJack) = 1,
     CFTCardReaderTypeBluetooth NS_SWIFT_NAME(bluetooth) = 2
 };
+
+/*!
+ * @typedef CFTCardReaderStatus
+ * @brief Card reader status
+ * @constant CFTCardReaderStatusAvailable Available reader
+ * @constant CFTCardReaderStatusConnected Currently connected reader
+ * @discussion Added in 4.1.0
+ */
+typedef NS_ENUM(NSInteger, CFTCardReaderStatus) {
+    CFTCardReaderStatusAvailable NS_SWIFT_NAME(available) = 0,
+    CFTCardReaderStatusConnected NS_SWIFT_NAME(connected) = 1
+};
+
+/*!
+ * @typedef CFTReaderUtilitiesSessionStatus
+ * @brief Utilities session status
+ * @constant CFTUtilitiesSessionStatusOpen The utilities session is open
+ * @constant CFTUtilitiesSessionStatusClosed The utilities session is closed
+ * @discussion Added in 4.1.0
+ */
+typedef NS_ENUM(NSInteger, CFTReaderUtilitiesSessionStatus) {
+    CFTReaderUtilitiesSessionStatusOpen NS_SWIFT_NAME(open) = 0,
+    CFTReaderUtilitiesSessionStatusClosed NS_SWIFT_NAME(closed) = 1
+};
+

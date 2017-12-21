@@ -20,3 +20,4 @@
 #import <CardFlight/CFTKeyedEntryView.h>
 #import <CardFlight/CFTInfo.h>
 #import <CardFlight/CFTMessage.h>
+#import <CardFlight/CFTReaderUtilities.h>

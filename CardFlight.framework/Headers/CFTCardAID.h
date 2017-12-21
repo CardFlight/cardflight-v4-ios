@@ -14,7 +14,7 @@
 /*!
  * @property name
  * @brief Name of the AID
- * Added in 4.0
+ * Added in 4.0.0
  */
 @property (nonatomic, readonly, copy, nullable) NSString *name;
 

@@ -1,3 +1,15 @@
+### 4.2.0
+* Added
+  * Ability to create Historical Transactions from charge IDs
+  * Additional field to Historical Transactions
+  * NFC support for Bold B550
+  * Utility class to allow reader connection outside of Transaction
+* Changed
+  * Improved log messages
+* Fixed
+  * Warning for accessing the wrong thread
+  * Fallback behavior on Swift readers
+
 ### 4.1.0
 * Added
   * Tokenization support

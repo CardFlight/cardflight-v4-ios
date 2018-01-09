@@ -3,7 +3,7 @@
  *
  * @brief Combined header for all public SDK headers
  *
- * @copyright 2017 CardFlight Inc. All rights reserved.
+ * @copyright 2018 CardFlight Inc. All rights reserved.
  */
 
 #import <CardFlight/CFTEnum.h>
@@ -21,3 +21,4 @@
 #import <CardFlight/CFTInfo.h>
 #import <CardFlight/CFTMessage.h>
 #import <CardFlight/CFTReaderUtilities.h>
+#import <Cardflight/CFTTokenizationParameters.h>

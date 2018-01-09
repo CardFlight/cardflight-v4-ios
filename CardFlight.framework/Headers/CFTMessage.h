@@ -1,10 +1,10 @@
-//
-//  CFTMessage.h
-//  CardFlight
-//
-//  Created by Paul Tower on 8/3/17.
-//  Copyright © 2017 CardFlight Inc. All rights reserved.
-//
+/*!
+ * @header CFTMessage.h
+ *
+ * @brief Contains messages that should be displayed to the user during a transaction.
+ *
+ * @copyright 2018 CardFlight Inc. All rights reserved.
+ */
 
 #import <Foundation/Foundation.h>
 

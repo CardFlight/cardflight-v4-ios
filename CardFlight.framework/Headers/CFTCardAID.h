@@ -4,7 +4,7 @@
  * @brief The AID (Application Identifier) of a card is used
  * to determine which payment system to use.
  *
- * @copyright 2017 CardFlight Inc. All rights reserved.
+ * @copyright 2018 CardFlight Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>

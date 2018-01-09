@@ -4,7 +4,7 @@
  * @brief The Historical Transaction object is created (usually by a Transaction object) 
  * to represent the record of a past transaction.
  *
- * @copyright 2017 CardFlight Inc. All rights reserved.
+ * @copyright 2018 CardFlight Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>

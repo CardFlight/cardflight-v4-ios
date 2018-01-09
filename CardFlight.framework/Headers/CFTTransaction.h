@@ -4,7 +4,7 @@
  * @brief The Transaction object is used to process any charges you want to make. 
  * It is the main point of interaction with the CardFlight SDK.
  *
- * @copyright 2017 CardFlight Inc. All rights reserved.
+ * @copyright 2018 CardFlight Inc. All rights reserved.
  */
 
 #import <UIKit/UIKit.h>
@@ -15,6 +15,7 @@
 @class CFTCardReaderInfo;
 @class CFTCardAID;
 @class CFTTransactionParameters;
+@class CFTTokenizationParameters;
 @class CFTAmount;
 @class CFTKeyedEntryView;
 @class CFTMessage;
@@ -36,6 +37,14 @@
  * Added in 4.0.0
  */
 @property (nonatomic, readonly, strong, nullable) CFTTransactionParameters *transactionParameters;
+
+/*!
+ * @property tokenizationParameters
+ * @brief Tokenization Parameters used by the Transaction
+ * Added in 4.3.0
+ */
+@property (nonatomic, readonly, strong, nullable) CFTTokenizationParameters *tokenizationParameters;
+
 
 /*!
  * @property reachability
@@ -149,13 +158,13 @@ NS_SWIFT_NAME(beginAuthorization(transactionParameters:));
 
 /*!
  * @brief Attempt to tokenize a card
- * @param transactionParameters CFTTransactionParameters - TransactionParameters used for tokenize
+ * @param tokenizationParameters CFTTokenizationParameters - TokenizationParameters used for tokenize
  * @discussion Will attempt to begin the process of tokenizing. If the state is not CFTTransactionStatePendingTransactionParameters,
  * the transactionDidUpdateState:error callback will respond with an error.
- * Added in 4.1.0
+ * Updated in 4.3.0
  */
-- (void)beginTokenizingWithTransactionParameters:(nonnull CFTTransactionParameters *)transactionParameters
-NS_SWIFT_NAME(beginTokenizing(transactionParameters:));
+- (void)beginTokenizingWithParameters:(nonnull CFTTokenizationParameters *)tokenizationParameters
+NS_SWIFT_NAME(beginTokenizing(tokenizationParameters:));
 
 /*!
  * @brief Select a CFTCardAID to use for the transaction
@@ -326,20 +335,5 @@ NS_SWIFT_NAME(transaction(_:didUpdate:));
  */
 - (void)transaction:(nonnull CFTTransaction *)transaction didRequestCardAidSelection:(nonnull NSArray<CFTCardAID *> *)cardAidArray
 NS_SWIFT_NAME(transaction(_:didRequestCardAidSelection:));
-
-// ******************** DEPRECATED ********************
-
-/*!
- * @deprecated Deprecated in Version 4.1
- * @note Please use @code transaction:didRequestDisplayMessages: @endcode instead
- * @brief A message to display to users
- * @param transaction CFTTransaction
- * @param message NSString
- * @discussion Required callback containing a message to be displayed to users.
- * Deprecated in 4.1
- * THIS WILL BE REMOVED IN THE NEXT RELEASE
- */
-- (void)transaction:(nonnull CFTTransaction *)transaction didRequestDisplayMessage:(nonnull NSString *)message
-NS_SWIFT_NAME(transaction(_:didRequestDisplay:)) __attribute__((deprecated));
 
 @end

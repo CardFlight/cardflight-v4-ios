@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                      = 'CardFlight-v4'
-  s.version                   = '4.2.0'
+  s.version                   = '4.3.0'
   s.summary                   = 'CardFlight mobile payments SDK'
 
   s.description               = <<-DESC
@@ -10,7 +10,7 @@ CardFlight mobile payments SDK for accepting credit card payments from with your
   s.homepage                  = 'https://cardflight.com'
   s.license                   = {
                                 :type => 'commercial',
-                                :text => 'Copyright 2017 Cardflight, Inc. All rights reserved.'
+                                :text => 'Copyright 2018 Cardflight, Inc. All rights reserved.'
                               }
   s.author                    = { 'CardFlight' => 'support@cardflight.com' }
   s.source                    = { :git => 'https://github.com/CardFlight/cardflight-v4-ios.git', :tag => "v#{s.version}" }

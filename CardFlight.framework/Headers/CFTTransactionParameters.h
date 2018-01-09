@@ -4,7 +4,7 @@
  * @brief Handles the parameters set on an individual transaction
  * Required to start a transaction.
  *
- * @copyright 2017 CardFlight Inc. All rights reserved.
+ * @copyright 2018 CardFlight Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>
@@ -22,7 +22,7 @@
 @property (nonatomic, readonly, strong, nonnull) CFTAmount *amount;
 
 /*!
- * @propert credentials
+ * @property credentials
  * @brief Credentials to use for processing
  * Added in 4.0.0
  */

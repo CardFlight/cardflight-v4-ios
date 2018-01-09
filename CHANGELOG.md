@@ -1,3 +1,10 @@
+### 4.3.0
+* Added
+  * Tokenize with existing Braintree customer ID
+* Fixed
+  * Reference ID on CFTHistoricalTransaction
+  * Better handling of transactions with cards that can't be processed
+
 ### 4.2.0
 * Added
   * Ability to create Historical Transactions from charge IDs

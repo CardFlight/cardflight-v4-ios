@@ -3,7 +3,7 @@
  *
  * @brief Returns general info about the SDK
  *
- * @copyright 2017 CardFlight Inc. All rights reserved.
+ * @copyright 2018 CardFlight Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>

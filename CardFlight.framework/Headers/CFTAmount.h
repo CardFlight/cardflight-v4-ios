@@ -4,7 +4,7 @@
  * @brief An Amount object is initialized with a number representing a US dollar amount to use. 
  * All amounts will be rounded according to banker’s rounding if needed.
  *
- * @copyright 2017 CardFlight Inc. All rights reserved.
+ * @copyright 2018 CardFlight Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>

@@ -4,7 +4,7 @@
  * @brief The Credentials object is created to authenticate a Transaction object. 
  * Once setup, the object will remain valid for 6 hours.
  *
- * @copyright 2017 CardFlight Inc. All rights reserved.
+ * @copyright 2018 CardFlight Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>

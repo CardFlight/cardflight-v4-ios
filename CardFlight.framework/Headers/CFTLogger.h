@@ -3,7 +3,7 @@
  *
  * @brief Handles routing of logging debug messages
  *
- * @copyright 2017 CardFlight Inc. All rights reserved.
+ * @copyright 2018 CardFlight Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>

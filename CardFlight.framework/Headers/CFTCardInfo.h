@@ -4,7 +4,7 @@
  * @brief The Card Info object is a representation of a customer’s payment card information.
  * The Card Info object has no writable parameters and only contains [out of PCI-scope] information.
  *
- * @copyright 2017 CardFlight Inc. All rights reserved.
+ * @copyright 2018 CardFlight Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>

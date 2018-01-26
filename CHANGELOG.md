@@ -1,3 +1,9 @@
+### 4.3.1
+* Added
+  * Additional logging around reader connections
+* Fixed
+  * Issues around switching between bluetooth readers
+
 ### 4.3.0
 * Added
   * Tokenize with existing Braintree customer ID

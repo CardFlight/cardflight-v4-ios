@@ -1,4 +1,8 @@
 ### 4.3.2
+* Changed
+  * Improved reader connection error handling
+
+### 4.3.2
 * Fixed
   * Incorrect transaction result in some cases
   * Improved TLV parsing

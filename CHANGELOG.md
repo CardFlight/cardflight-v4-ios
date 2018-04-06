@@ -1,4 +1,10 @@
-### 4.3.2
+### 4.4.0
+* Added
+  * CVV optional on keyed transactions
+* Changed
+  * Improved handling of declined dip transactions
+
+### 4.3.3
 * Changed
   * Improved reader connection error handling
 

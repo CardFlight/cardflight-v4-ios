@@ -1,3 +1,7 @@
+### 4.4.1
+* Changed
+  * Improved reader disconnection behavior
+
 ### 4.4.0
 * Added
   * CVV optional on keyed transactions

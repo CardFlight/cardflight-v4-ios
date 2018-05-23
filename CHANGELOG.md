@@ -1,3 +1,7 @@
+### 4.4.2
+* Changed
+    * Improved reader error behavior
+
 ### 4.4.1
 * Changed
   * Improved reader disconnection behavior

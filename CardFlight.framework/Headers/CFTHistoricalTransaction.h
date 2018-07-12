@@ -16,6 +16,7 @@
 @class CFTCardInfo;
 @class CFTAmount;
 @class CFTCredentials;
+@class CFTAvsResponse;
 
 @interface CFTHistoricalTransaction : NSObject
 
@@ -99,7 +100,7 @@ NS_SWIFT_NAME(retrieve(chargeId:credentials:completion:));
 /*!
  * @property transactedAt
  * @brief Date when the Transaction was processed
- * Added in 4.0.0
+ * Updated in 4.5.0
  */
 @property (nonatomic, readonly, strong, nullable) NSDate *transactedAt;
 
@@ -137,6 +138,13 @@ NS_SWIFT_NAME(retrieve(chargeId:credentials:completion:));
  * Added in 4.0.0
  */
 @property (nonatomic, readonly, assign) CFTTransactionType transactionType;
+
+/*!
+ * @property avsResponse
+ * @brief Avs result of the transaction
+ * Added in 4.5.0
+ */
+@property (nonatomic, readonly, strong, nullable) CFTAvsResponse *avsResponse;
 
 /*!
  * @brief Refresh the historical transaction

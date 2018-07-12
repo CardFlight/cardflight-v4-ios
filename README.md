@@ -14,10 +14,6 @@ platform :ios, '8.0'
 pod "CardFlight-v4"
 ```
 
-## Carthage
-
-*Carthage support will be added with the final release of 4.0*
-
 ## Github
 
 1. Clone this repo into your project.

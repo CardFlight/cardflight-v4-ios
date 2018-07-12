@@ -16,9 +16,23 @@
 /*!
  * @property baseUrl
  * @brief URL to optionally use a different API URL
- * Added in 4.0.0
+ * Deprecated in 4.5.0
  */
-@property (nonatomic, readonly, strong, nonnull) NSURL *baseUrl;
+@property (nonatomic, readonly, strong, nonnull) NSURL *baseUrl DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.5.0. Use `baseUrlV1` instead");
+
+/*!
+ * @property baseUrlV1
+ * @brief URL to optionally use a different v1 API URL
+ * Added in 4.5.0
+ */
+@property (nonatomic, readonly, strong, nonnull) NSURL *baseUrlV1;
+
+/*!
+ * @property baseUrlV2
+ * @brief URL to optionally use a different v2 API URL
+ * Added in 4.5.0
+ */
+@property (nonatomic, readonly, strong, nonnull) NSURL *baseUrlV2;
 
 /*!
  * @property apiKey
@@ -49,6 +63,15 @@
  */
 - (void)privateFunctionOne:(nullable id)parameter
 NS_SWIFT_NAME(privateFunctionOne(_:));
+
+/*!
+ * @brief Private method
+ * @param parameter id - Parameter of the method
+ * @discussion This is only to be used by clients who have made arrangements with CardFlight
+ * Added in 4.5.0
+ */
+- (void)privateFunctionTwo:(nullable id)parameter
+NS_SWIFT_NAME(privateFunctionTwo(_:));
 
 /*!
  * @brief The current state of the transaction

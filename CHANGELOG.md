@@ -1,3 +1,11 @@
+### 4.5.0
+* Added
+  * Card ID on card info
+* Fixed
+  * Accurate dates on Historical Transactions
+* Changed
+  * Improved Bold reader detection
+
 ### 4.4.2
 * Changed
     * Improved reader error behavior

@@ -13,6 +13,13 @@
 @interface CFTCardInfo : NSObject
 
 /*!
+ * @property cardId
+ * @brief ID of the card that can be used to run additional charges using the API
+ * Added in 4.5.0
+ */
+@property (nonatomic, readonly, copy, nullable) NSString *cardId;
+
+/*!
  * @property cardBrand
  * @brief Card Brand
  * Added in 4.0.0

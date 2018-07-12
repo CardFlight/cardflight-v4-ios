@@ -165,6 +165,14 @@ typedef NS_ENUM(NSInteger, CFTTransactionResult) {
     CFTTransactionResultVoided NS_SWIFT_NAME(voided) = 5
 };
 
+typedef NS_ENUM(NSInteger, CFTAvsResult) {
+    CFTAvsResultUnknown NS_SWIFT_NAME(unknown) = 0,
+    CFTAvsResultMatched NS_SWIFT_NAME(matched) = 1,
+    CFTAvsResultNotMatched NS_SWIFT_NAME(notMatched) = 2,
+    CFTAvsResultNotRequested NS_SWIFT_NAME(notRequested) = 3,
+    CFTAvsResultServiceUnavailable NS_SWIFT_NAME(serviceUnavailable) = 4
+};
+
 /*!
  * @typedef CFTTransactionType
  * @bried The type of transaction being performed

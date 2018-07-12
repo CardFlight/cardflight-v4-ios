@@ -22,3 +22,4 @@
 #import <CardFlight/CFTMessage.h>
 #import <CardFlight/CFTReaderUtilities.h>
 #import <Cardflight/CFTTokenizationParameters.h>
+#import <Cardflight/CFTAvsResponse.h>

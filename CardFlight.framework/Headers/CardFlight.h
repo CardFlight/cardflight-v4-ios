@@ -18,6 +18,10 @@
 #import <CardFlight/CFTCardAID.h>
 #import <CardFlight/CFTAmount.h>
 #import <CardFlight/CFTKeyedEntryView.h>
+#import <CardFlight/CFTCardEntryView.h>
+#import <CardFlight/CFTAvsEntryView.h>
+#import <CardFlight/CFTKeyedEntryContainer.h>
+#import <CardFlight/CFTEntryView.h>
 #import <CardFlight/CFTInfo.h>
 #import <CardFlight/CFTMessage.h>
 #import <CardFlight/CFTReaderUtilities.h>

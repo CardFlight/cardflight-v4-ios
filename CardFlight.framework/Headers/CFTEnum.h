@@ -363,3 +363,21 @@ typedef NS_ENUM(NSInteger, CFTReaderUtilitiesSessionStatus) {
     CFTReaderUtilitiesSessionStatusClosed NS_SWIFT_NAME(closed) = 1
 };
 
+/*!
+ * @typedef CFTKeyedEntryContainerEvent
+ * @brief Keyed entry container event
+ * @constant CFTKeyedEntryContainerEventUnknown
+ * @constant CFTKeyedEntryContainerEventCardIncomplete The card information provided is not yet complete
+ * @constant CFTKeyedEntryContainerEventCardComplete The card information provided has completed card number, expiration date, and CVV value
+ * @constant CFTKeyedEntryContainerEventAddressIncomplete The address information provided is not yet complete
+ * @constant CFTKeyedEntryContainerEventAddressComplete The address information provided has completed street address, city, and zip code
+ * @discussion Specifies whether or not complete card and address information was provided. Added in 4.6.0
+ */
+typedef NS_ENUM(NSInteger, CFTKeyedEntryContainerEvent) {
+    CFTKeyedEntryContainerEventUnknown NS_SWIFT_NAME(unknown) = 0,
+    CFTKeyedEntryContainerEventCardIncomplete NS_SWIFT_NAME(cardIncomplete) = 1,
+    CFTKeyedEntryContainerEventCardComplete NS_SWIFT_NAME(cardComplete) = 2,
+    CFTKeyedEntryContainerEventAvsIncomplete NS_SWIFT_NAME(avsIncomplete) = 3,
+    CFTKeyedEntryContainerEventAvsComplete NS_SWIFT_NAME(avsComplete) = 4
+};
+

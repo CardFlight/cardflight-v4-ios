@@ -1,3 +1,12 @@
+### 4.6.0
+* Added
+  * Accept AVS details on keyed transactions
+* Changed
+  * Keyed transactions can be disabled
+* Fixed
+  * Multiple tokenizations can be run in a row
+  * Connected audio jack readers will now show in the available readers list
+
 ### 4.5.0
 * Added
   * Card ID on card info

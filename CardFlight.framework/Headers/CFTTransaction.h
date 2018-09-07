@@ -19,6 +19,7 @@
 @class CFTAmount;
 @class CFTKeyedEntryView;
 @class CFTMessage;
+@class CFTKeyedEntryContainer;
 
 @protocol CFTTransactionDelegate;
 
@@ -126,11 +127,23 @@ NS_SWIFT_NAME(select(cardReaderInfo:cardReaderModel:));
  * Added in 4.0.0
  */
 - (nullable CFTKeyedEntryView *)keyedEntryViewWithZipEnabled:(BOOL)zipEnabled
-NS_SWIFT_NAME(keyedEntryView(zipEnabled:));
+NS_SWIFT_NAME(keyedEntryView(zipEnabled:))
+DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.6.0. Use `keyedEntryContainer` instead");
 
 /*!
- * @brief Use card info generated from keyed entry view
- * @discussion Will use information input into keyed entry view for card info
+ * @brief Use a card or address entry view
+ * @return CFTKeyedEntryContainer - Returned entry view container
+ * @discussion Will return an entry container if state is CFTTransactionStatePendingTransactionParameters or CFTTransactionStatePendingCardInput
+ * Container will have its avsEntryView property populated if AVS is supported
+ * Added in 4.6.0
+ */
+- (nullable CFTKeyedEntryContainer*)keyedEntryContainer
+NS_SWIFT_NAME(keyedEntryContainer());
+
+
+/*!
+ * @brief Use card and avs info generated from keyed entry views
+ * @discussion Will use information input into keyed entry views for card and avs info
  * Added in 4.0.0
  */
 - (void)useKeyedCardInfo
@@ -300,6 +313,17 @@ NS_SWIFT_NAME(transaction(_:didReceive:cardReaderInfo:));
  * Added in 4.0.0
  */
 - (void)transaction:(nonnull CFTTransaction *)transaction didReceiveKeyedEntryEvent:(CFTKeyedEntryEvent)keyedEntryEvent
+NS_SWIFT_NAME(transaction(_:didReceive:))
+DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.6.0. Use `didReceiveKeyedEntryContainerEvent` instead");
+
+/*!
+ * @brief An entry event was received
+ * @param transaction CFTTransaction
+ * @param keyedEntryContainerEvent CFTKeyedEntryContainerEvent
+ * @discussion Optional callback triggered when the keyed entry container encounters an event.
+ * Added in 4.6.0
+ */
+- (void)transaction:(nonnull CFTTransaction *)transaction didReceiveKeyedEntryContainerEvent:(CFTKeyedEntryContainerEvent)keyedEntryContainerEvent
 NS_SWIFT_NAME(transaction(_:didReceive:));
 
 /*!

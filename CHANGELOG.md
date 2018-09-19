@@ -1,3 +1,8 @@
+### 4.6.1
+* Fixed
+  * Crash when connecting A100
+  * Improved messaging during a transaction
+
 ### 4.6.0
 * Added
   * Accept AVS details on keyed transactions

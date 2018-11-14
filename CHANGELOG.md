@@ -1,3 +1,9 @@
+### 4.6.2
+* Fixed
+  * Change process prompt for tokenization transactions
+  * Authorizations fixed
+  * Various bug fixes and performance improvements
+
 ### 4.6.1
 * Fixed
   * Crash when connecting A100

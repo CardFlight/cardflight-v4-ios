@@ -1,3 +1,11 @@
+### 4.8.0
+* Changed
+     * Interface updates
+* Added
+     * Can keep reader connection alive using Reader utilities.
+     * EMV receipt details.
+     * CVV keyed entry validation
+   
 ### 4.6.4
 * Fixed
 * Credential validation(regression from 4.6.3) for devices running  **< iOS 10.3**

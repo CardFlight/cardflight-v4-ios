@@ -25,8 +25,8 @@
 
 @interface CFTLogger : NSObject
 
-@property (nonatomic, readwrite, weak, nullable) id <CFTLoggerDelegate> delegate;
-
+@property (nonatomic, readwrite, weak, nullable) id <CFTLoggerDelegate> delegate
+DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.8.0. Use `CFTSessionManager`'s `loggerDelegate` instead");
 /*!
  * @brief Accessor for the logger singleton
  * @discussion Access the logger singleton
@@ -40,6 +40,6 @@
  * @discussion Pass YES to enable developer logging mode to the console.
  * Added in 4.0.0
  */
-- (void)setLogging:(BOOL)logging;
+- (void)setLogging:(BOOL)logging DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.8.0. Use `CFTSessionManager`'s `isLogging` property to set SDK logging instead.");
 
 @end

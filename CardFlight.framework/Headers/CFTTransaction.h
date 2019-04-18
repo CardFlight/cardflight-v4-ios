@@ -20,6 +20,7 @@
 @class CFTKeyedEntryView;
 @class CFTMessage;
 @class CFTKeyedEntryContainer;
+@class CFTTransactionRecord;
 
 @protocol CFTTransactionDelegate;
 
@@ -281,17 +282,29 @@ NS_SWIFT_NAME(transaction(_:didDefer:));
 NS_SWIFT_NAME(transaction(_:didRequest:));
 
 /*!
+ * @brief A transaction record from a completed transaction
+ * @param transaction CFTTransaction
+ * @param transactionRecord CFTTransactionRecord
+ * @discussion Required callback containing the resulting transaction record
+ * from a transaction in the CFTTransactionStateCompleted state.
+ * Added in 4.7.0
+ */
+- (void)transaction:(nonnull CFTTransaction *)transaction didCompleteWithTransactionRecord:(nonnull CFTTransactionRecord *)transactionRecord
+NS_SWIFT_NAME(transaction(_:didComplete:));
+
+@optional
+
+/*!
  * @brief A historical transaction from a completed transaction
  * @param transaction CFTTransaction
  * @param historicalTransaction CFTHistoricalTransaction
- * @discussion Required callback containing the resulting historical transaction
+ * @discussion Optional callback containing the resulting historical transaction
  * from a transaction in the CFTTransactionStateCompleted state.
  * Added in 4.0.0
  */
 - (void)transaction:(nonnull CFTTransaction *)transaction didCompleteWithHistoricalTransaction:(nonnull CFTHistoricalTransaction *)historicalTransaction
-NS_SWIFT_NAME(transaction(_:didComplete:));
-
-@optional
+NS_SWIFT_NAME(transaction(_:didComplete:))
+DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.7.0. Use `didCompleteWithTransactionRecord` instead");
 
 /*!
  * @brief A card reader event was received

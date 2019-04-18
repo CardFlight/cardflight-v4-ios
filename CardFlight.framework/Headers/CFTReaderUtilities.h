@@ -17,6 +17,14 @@
 
 @property (nonatomic, weak, readwrite, nullable) NSObject<CFTReaderUtilitiesDelegate> *delegate;
 
+
+/**
+ @property shouldKeepReaderConnectionAlive
+ @brief Flag indicating if reader should stay connected or not between transactions. Reader would still be disconnected when session closes.
+ Added in 4.6.3
+ */
+@property (nonatomic, assign) BOOL shouldKeepReaderConnectionAlive;
+
 /*!
  * @brief Opens a utilities session
  * @discussion Will request a utilities session in order to scan or connect to card readers

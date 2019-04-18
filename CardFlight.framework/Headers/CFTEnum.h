@@ -191,6 +191,7 @@ typedef NS_ENUM(NSInteger, CFTTransactionType) {
     CFTTransactionTypeTokenization NS_SWIFT_NAME(tokenization) = 4
 };
 
+DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.8.0. Use 'CFTApiTransactionState' instead")
 /*!
  * @typedef CFTApiTransactionStatus
  * @bried The current status of the historical transaction
@@ -216,6 +217,34 @@ typedef NS_ENUM(NSInteger, CFTApiTransactionStatus) {
     CFTHistoricalTransactionStatusVoided NS_SWIFT_NAME(voided) = 6,
     CFTHistoricalTransactionStatusDeclined NS_SWIFT_NAME(declined) = 7,
     CFTHistoricalTransactionStatusSettled NS_SWIFT_NAME(settled) = 8
+    
+};
+
+/*!
+ * @typedef CFTApiTransactionState
+ * @bried The current status of the transaction record
+ * @constant CFTTransactionTypeUnknown Unknown state. An error has occurred.
+ * @constant CFTApiTransactionStatePendingPreApproved Authorization requested, awaiting result.
+ * @constant CFTApiTransactionStatePreApproved Authorization approved, cardholder statement shows funds as `PENDING`.
+ * @constant CFTApiTransactionStatePendingApproved Sale, Capture, or Refund requested, awaiting result.
+ * @constant CFTApiTransactionStateApproved Sale, Capture, or Refund approved, funds to be moved between merchant and cardholder.
+ * @constant CFTApiTransactionStatePendingVoid Void requested, awaiting result.
+ * @constant CFTApiTransactionStateVoided Transaction voided, funds are released to cardholder and no money is moved.
+ * @constant CFTApiTransactionStateDeclined Authorization, Sale, or Refund request declined.
+ * @constant CFTApiTransactionStateSettled Capture, Sale, or Refund settled.
+ * @discussion This status mirrors the transaction status available from the Cardflight API
+ * Added in 4.1.0
+ */
+typedef NS_ENUM(NSInteger, CFTApiTransactionState) {
+    CFTApiTransactionStateUnknown NS_SWIFT_NAME(unknown) = 0,
+    CFTApiTransactionStatePendingPreApproved NS_SWIFT_NAME(pendingPreApproved) = 1,
+    CFTApiTransactionStatePreApproved NS_SWIFT_NAME(preApproved) = 2,
+    CFTApiTransactionStatePendingApproved NS_SWIFT_NAME(pendingApproved) = 3,
+    CFTApiTransactionStateApproved NS_SWIFT_NAME(approved) = 4,
+    CFTApiTransactionStatePendingVoid NS_SWIFT_NAME(pendingVoid) = 5,
+    CFTApiTransactionStateVoided NS_SWIFT_NAME(voided) = 6,
+    CFTApiTransactionStateDeclined NS_SWIFT_NAME(declined) = 7,
+    CFTApiTransactionStateSettled NS_SWIFT_NAME(settled) = 8
     
 };
 

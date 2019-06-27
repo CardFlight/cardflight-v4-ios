@@ -81,4 +81,14 @@ NS_SWIFT_NAME(validate(merchantAccount:completion:));
 - (nullable NSError *) getValidationErrorWithMerchantAccount:(nonnull CFTMerchantAccount *)merchantAccount
 NS_SWIFT_NAME(getValidationError(merchantAccount:));
 
+/*!
+* @brief Get capabilities of a merchant account.
+* @param merchantAccount CFTMerchantAccount
+* @param completion Completion block which will get called with capabilities.
+* Added in 4.0.0
+*/
+- (void)getCapabilitiesWithMerchantAccount: (nonnull CFTMerchantAccount*)merchantAccount
+                                completion: (void (^_Nonnull)(NSArray<NSNumber*> * _Nonnull capabilities))completion
+NS_SWIFT_NAME(capabilities(merchantAccount:completion:));
+
 @end

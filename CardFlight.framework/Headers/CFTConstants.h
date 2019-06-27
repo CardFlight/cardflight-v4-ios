@@ -10,6 +10,7 @@
 
 @class CFTHistoricalTransaction;
 @class CFTTransactionRecord;
+@class CFTTransaction;
 
 @interface CFTConstants : NSObject
 
@@ -17,6 +18,7 @@
 typedef void (^CFTBasicBlock)(NSError * _Nullable error);
 typedef void (^CFTStandardBlock)(BOOL success, NSError * _Nullable error);
 typedef void (^CFTLegacyTransactionBlock)(CFTHistoricalTransaction * _Nullable historicalTransaction, NSError * _Nullable error);
-typedef void (^CFTTransactionBlock)(CFTTransactionRecord * _Nullable transactionRecord, NSError * _Nullable error);
+typedef void (^CFTTransactionRecordBlock)(CFTTransactionRecord * _Nullable transactionRecord, NSError * _Nullable error);
+typedef void (^CFTTransactionBlock)(CFTTransaction* _Nullable transaction, NSError* _Nullable error);
 
 @end

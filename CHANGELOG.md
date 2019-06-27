@@ -1,3 +1,7 @@
+### 4.8.4
+* Added
+    * Interface updates.
+    * Bug fixes.
 ### 4.8.0
 * Changed
      * Interface updates

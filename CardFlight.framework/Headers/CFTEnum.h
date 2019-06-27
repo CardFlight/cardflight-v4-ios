@@ -410,3 +410,32 @@ typedef NS_ENUM(NSInteger, CFTKeyedEntryContainerEvent) {
     CFTKeyedEntryContainerEventAvsComplete NS_SWIFT_NAME(avsComplete) = 4
 };
 
+
+/*!
+ * @typedef CFTMerchantAccountCapability
+ * @brief Merchant account's capabilities
+ * @constant CFTMerchantAccountCapabilityCanProcessTransactions Merchant account can process transactions.
+ * @constant CFTMerchantAccountCapabilityCanUseKeyedTransactions Merchant account can use keyed transactions.
+ * @constant CFTMerchantAccountCapabilityCanUseAvs Merchant acoount can use AVS
+ * @constant CFTMerchantAccountCapabilityCanAdjustTransactions Transactions can be adjusted.
+ */
+typedef NS_ENUM(NSInteger, CFTMerchantAccountCapability) {
+    CFTMerchantAccountCapabilityCanProcessTransactions NS_SWIFT_NAME(merchantAccountCanProcessTransactions) = 0,
+    CFTMerchantAccountCapabilityCanUseKeyedTransactions NS_SWIFT_NAME(merchantAccountCanUseKeyedTransactions) = 1,
+    CFTMerchantAccountCapabilityCanUseAvs NS_SWIFT_NAME(merchantAccountCanUseAvs) = 2,
+    CFTMerchantAccountCapabilityCanAdjustTransactions NS_SWIFT_NAME(merchantAccountCanAdjustTransactions) = 3,
+    CFTMerchantAccountCapabilityCanGenerateDeferredTransactions NS_SWIFT_NAME(merchantAccountCanGenerateDeferredTransactions) = 4
+};
+
+/*!
+ * @typedef CFTTransactionCapability
+ * @brief Transaction capabilities
+ * @constant CFTTransactionCapabilityCanBeRefundedWithCardInput Transaction can refund with card input.
+ * @constant CFTTransactionCapabilityCanBeRefundedWithoutCardInput Transaction can refund without card input.
+ */
+typedef NS_ENUM(NSInteger, CFTTransactionCapability) {
+    CFTTransactionCapabilityCanBeRefundedWithCardInput NS_SWIFT_NAME(transactionCanBeRefundedWithCardInput) = 0,
+    CFTTransactionCapabilityCanBeRefundedWithoutCardInput NS_SWIFT_NAME(transactionCanBeRefundedWithoutCardInput) = 1,
+    CFTTransactionCapabilityCanBeVoided NS_SWIFT_NAME(transactionCanBeVoided) = 2
+};
+

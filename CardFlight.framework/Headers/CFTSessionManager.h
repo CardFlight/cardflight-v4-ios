@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CFTLogger.h"
+#import "CFTMerchantAccount.h"
 
 /**
  * SessionManager singleton to manage a session.

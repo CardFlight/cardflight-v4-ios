@@ -11,6 +11,7 @@
 @class CFTCredentials;
 @class CFTMerchantAccount;
 
+DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.8.1. Use `CFTTransactionManager` to create tokenization without `CFTTokenizationParameters`")
 @interface CFTTokenizationParameters : NSObject
 
 /*!

@@ -70,4 +70,11 @@
  */
 @property (nonatomic, readonly, copy, nullable) CFTPermissions *permissions;
 
+/*!
+ * @property processor
+ * @brief Payment processor.
+ * Added in 4.8.1
+ */
+@property (nonatomic, readonly, copy, nullable) NSString *processor;
+
 @end

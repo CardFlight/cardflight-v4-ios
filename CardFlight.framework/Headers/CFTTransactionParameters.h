@@ -13,6 +13,7 @@
 @class CFTAmount;
 @class CFTMerchantAccount;
 
+DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.8.1. Use `CFTTransactionManager` to create transaction without `CFTTransactionParameters`.")
 @interface CFTTransactionParameters : NSObject
 
 /*!

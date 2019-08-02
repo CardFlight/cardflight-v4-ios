@@ -1,3 +1,6 @@
+### 4.8.5
+ * Added
+    * Updated metadata's type in CFTTransactionManager methods. 
 ### 4.8.4
 * Added
     * Interface updates.

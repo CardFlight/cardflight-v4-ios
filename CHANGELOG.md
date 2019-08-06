@@ -1,6 +1,13 @@
+### 4.8.6
+ * Added
+    * Added external transaction state of PendingAdjustment.
+    * Added DeviceManager.
+    * Added Debit routing.
+ * Fixed
+      * Resume deferred transaction crash.
 ### 4.8.5
  * Added
-    * Updated metadata's type in CFTTransactionManager methods. 
+    * Updated metadata's type in CFTTransactionManager methods.
 ### 4.8.4
 * Added
     * Interface updates.
@@ -12,7 +19,7 @@
      * Can keep reader connection alive using Reader utilities.
      * EMV receipt details.
      * CVV keyed entry validation
-   
+
 ### 4.6.4
 * Fixed
 * Credential validation(regression from 4.6.3) for devices running  **< iOS 10.3**
@@ -20,7 +27,7 @@
 ### 4.6.3
 * Fixed
   * Credential validation for devices running  **< iOS 10.3**
- 
+
 ### 4.6.2
 * Fixed
   * Change process prompt for tokenization transactions

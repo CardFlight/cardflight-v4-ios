@@ -18,6 +18,8 @@
  * @constant CFTTransactionStateProcessing Transaction is currently processing the payment
  * @constant CFTTransactionStateCompleted Transaction has finished processing
  * @constant CFTTransactionStateDeferred Transaction has been deferred and must be resumed using deferred transaction data
+ * @constant CFTTransactionStatePendingCvm Transaction is in pending CVM state and requires transaction to attach signature
+ * @constant CFTTransactionStatePendingAdjustment Transaction is in pending adjustment state and requires the transaction to attach a tip
  * @discussion Current public state of the transaction
  * Most transactions will proceed through all 5 states in linear order.
  * The current state can be used to determine the flow of control in the host application.
@@ -30,7 +32,9 @@ typedef NS_ENUM(NSInteger, CFTTransactionState) {
     CFTTransactionStatePendingProcessOption NS_SWIFT_NAME(pendingProcessOption) = 3,
     CFTTransactionStateProcessing NS_SWIFT_NAME(processing) = 4,
     CFTTransactionStateCompleted NS_SWIFT_NAME(completed) = 5,
-    CFTTransactionStateDeferred NS_SWIFT_NAME(deferred) = 6
+    CFTTransactionStateDeferred NS_SWIFT_NAME(deferred) = 6,
+    CFTTransactionStatePendingCvm NS_SWIFT_NAME(pendingCvm) = 7,
+    CFTTransactionStatePendingAdjustment NS_SWIFT_NAME(pendingAdjustment) = 8
 };
 
 /*!
@@ -135,13 +139,15 @@ typedef NS_ENUM(NSInteger, CFTProcessOption) {
  * @constant CFTCVMUnknown Unknown CVM, should not occur in normal operation
  * @constant CFTCVMNone No CVM requested
  * @constant CFTCVMSignature Signature CVM requested
+ * @constant CFTCVMPin Pin CVM requested
  * @discussion All currently supported cardholder verification methods
  * Added in 4.0.0
  */
 typedef NS_ENUM(NSInteger, CFTCVM) {
     CFTCVMUnknown NS_SWIFT_NAME(unknown) = 0,
     CFTCVMNone NS_SWIFT_NAME(none) = 1,
-    CFTCVMSignature NS_SWIFT_NAME(signature) = 2
+    CFTCVMSignature NS_SWIFT_NAME(signature) = 2,
+    CFTCVMPin NS_SWIFT_NAME(pin) = 3
 };
 
 /*!
@@ -416,15 +422,21 @@ typedef NS_ENUM(NSInteger, CFTKeyedEntryContainerEvent) {
  * @brief Merchant account's capabilities
  * @constant CFTMerchantAccountCapabilityCanProcessTransactions Merchant account can process transactions.
  * @constant CFTMerchantAccountCapabilityCanUseKeyedTransactions Merchant account can use keyed transactions.
- * @constant CFTMerchantAccountCapabilityCanUseAvs Merchant acoount can use AVS
+ * @constant CFTMerchantAccountCapabilityCanUseAvs Merchant acoount can use AVS.
  * @constant CFTMerchantAccountCapabilityCanAdjustTransactions Transactions can be adjusted.
+ * @constant CFTMerchantAccountCapabilityCanUsePin Merchant account can use pin.
+ * @constant CFTMerchantAccountCapabilityCanUseCreditNetwork Merchant account can process transactions over the credit network.
+ * @constant CFTMerchantAccountCapabilityCanUseDebitNetwork Merchant account can process transactions over the debit network.
  */
 typedef NS_ENUM(NSInteger, CFTMerchantAccountCapability) {
     CFTMerchantAccountCapabilityCanProcessTransactions NS_SWIFT_NAME(merchantAccountCanProcessTransactions) = 0,
     CFTMerchantAccountCapabilityCanUseKeyedTransactions NS_SWIFT_NAME(merchantAccountCanUseKeyedTransactions) = 1,
     CFTMerchantAccountCapabilityCanUseAvs NS_SWIFT_NAME(merchantAccountCanUseAvs) = 2,
     CFTMerchantAccountCapabilityCanAdjustTransactions NS_SWIFT_NAME(merchantAccountCanAdjustTransactions) = 3,
-    CFTMerchantAccountCapabilityCanGenerateDeferredTransactions NS_SWIFT_NAME(merchantAccountCanGenerateDeferredTransactions) = 4
+    CFTMerchantAccountCapabilityCanGenerateDeferredTransactions NS_SWIFT_NAME(merchantAccountCanGenerateDeferredTransactions) = 4,
+    CFTMerchantAccountCapabilityCanUsePin NS_SWIFT_NAME(merchantAccountCanUsePin) = 5,
+    CFTMerchantAccountCapabilityCanUseCreditNetwork NS_SWIFT_NAME(merchantAccountCanUseCreditNetwork) = 6,
+    CFTMerchantAccountCapabilityCanUseDebitNetwork NS_SWIFT_NAME(merchantAccountCanUseDebitNetwork) = 7
 };
 
 /*!
@@ -439,3 +451,22 @@ typedef NS_ENUM(NSInteger, CFTTransactionCapability) {
     CFTTransactionCapabilityCanBeVoided NS_SWIFT_NAME(transactionCanBeVoided) = 2
 };
 
+/*!
+ * @typedef CFTDeviceManagerCapability
+ * @brief Device's capabilities
+ * @constant CFTDeviceManagerCapabilityHasIntegratedKeypad Device has integrated keypad.
+ */
+typedef NS_ENUM(NSInteger, CFTDeviceManagerCapability) {
+    CFTDeviceManagerCapabilityHasIntegratedKeypad NS_SWIFT_NAME(deviceHasIntegratedKeypad) = 0
+};
+    
+/*!
+ * @typedef CFTNetworkType
+ * @brief Network type for a transaction
+ * @constant CFTNetworkTypeCredit Transaction is processed over the credit network.
+ * @constant CFTNetworkTypeDebit Transaction is processed over the debit network.
+ */
+typedef NS_ENUM(NSInteger, CFTNetworkType) {
+    CFTNetworkTypeCredit NS_SWIFT_NAME(credit) = 0,
+    CFTNetworkTypeDebit NS_SWIFT_NAME(debit) = 1
+};

@@ -38,4 +38,11 @@
  */
 @property (nonatomic, readonly, assign) BOOL isKeyedEntryEnabled;
 
+/*!
+ * @property allowDebit
+ * @brief Boolean to determine whether transactions can process over the debit network.
+ * Added in 4.9.0
+ */
+@property (nonatomic, readonly, assign) BOOL allowDebit;
+
 @end

@@ -26,7 +26,7 @@ DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.8.1. Use `CFTTransactionManager` to cr
  * @brief Credentials to use for processing.
  * Added in 4.3.0
  */
-@property (nonatomic, readonly, strong, nonnull) CFTCredentials *credentials;
+@property (nonatomic, readonly, strong, nonnull) CFTCredentials *credentials
 DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.7.0. Use `merchantAccount` instead");
 
 - (nonnull instancetype)init NS_UNAVAILABLE;

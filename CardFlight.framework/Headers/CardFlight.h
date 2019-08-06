@@ -33,3 +33,4 @@
 #import <CardFlight/CFTTransactionManager.h>
 #import <CardFlight/CFTTransactionParameters.h>
 #import <CardFlight/CFTTransactionRecord.h>
+#import <CardFlight/CFTDeviceManager.h>

@@ -31,7 +31,7 @@
  */
 - (nonnull CFTMerchantAccount *) createWithMerchantAccountId:(nonnull NSString *)merchantAccountId
                                                       apiKey:(nonnull NSString *)apiKey
-                                                       error:(NSError **)error
+                                                       error:(NSError * _Nullable * _Nullable)error
 NS_SWIFT_NAME(create(merchantAccountId:apiKey:))
 __attribute__((swift_error(nonnull_error)));
 

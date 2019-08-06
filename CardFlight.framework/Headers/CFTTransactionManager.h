@@ -1,14 +1,14 @@
 /*!
  * @header CFTTransactionManager.h
  *
- * @brief The Transaction Manager object is created (usually by a Transaction object)
- * to represent actions that can be taken on a transaction record.
+ * @brief The Transaction Manager singleton is used to manage and perform actions on a transaction.
  *
  * @copyright 2019 CardFlight Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>
 #import "CFTConstants.h"
+#import "CFTEnum.h"
 
 @class CFTAmount;
 @class CFTMerchantAccount;
@@ -26,19 +26,6 @@
  * Added in 4.7.0
  */
 + (nonnull instancetype)shared;
-
-/*!
- * @brief Attempt to void the current transaction
- * @param transactionRecord CFTTransactionRecord is the transaction record that is being voided
- * @param completion CFTStandardBlock - Block to handle the result of the void, contains BOOL and NSError
- * @discussion Will attempt to void the current transaction. Upon completion, the completion block is triggered
- * indicating the void attempt has finished and potentially an error if the void did not complete successfully
- * Added in 4.7.0
- */
-- (void)attemptVoidWithTransactionRecord:(nonnull CFTTransactionRecord *)transactionRecord
-                              completion:(nullable CFTStandardBlock)completion
-NS_SWIFT_NAME(attemptVoid(transactionRecord:completion:))
-DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.8.1. Use `attemptVoid(transactionRecord:delegate:completion:)` instead");
 
 /*!
  * @brief Attempt to create the void transaction
@@ -66,23 +53,6 @@ NS_SWIFT_NAME(attemptVoid(transactionRecord:delegate:completion:));
             transactionRecord:(nonnull CFTTransactionRecord *)transactionRecord
                    completion:(nullable CFTStandardBlock)completion
 NS_SWIFT_NAME(captureAuth(amount:transactionRecord:completion:));
-
-/*!
- * @brief Attempt to authorize an amount
- * @param transactionParameters CFTTransactionParameters - TransactionParameters used for authorization
- * @param delegate CFTTransactionDelegate - TransactionDelegate used to report events to the transaction
- * @return CFTTransaction - containing the data of the created authorization transaction
- * @throws NSError - Throws error if create auth is failed.
- * @discussion Will attempt to begin an authorization. If the state is not CFTTransactionStatePendingTransactionParameters,
- * the transactionDidUpdateState:error callback will respond with an error.
- * Added in 4.7.0
- */
-- (nullable CFTTransaction *)createAuthWithTransactionParameters:(nonnull CFTTransactionParameters *)transactionParameters
-                                                        delegate:(nonnull id<CFTTransactionDelegate>)delegate
-                                                           error:(NSError *_Nullable *_Nullable)error
-NS_SWIFT_NAME(createAuth(transactionParameters:delegate:))
-DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.8.1. Use `createAuth(amount:merchantAccount:delegate:completion)` or  `createAuth(amount:merchantAccount:callbackUrl:metadata:isSignatureRequired:isQuickChipEnabled:delegate:completion:)` instead")
-__attribute__((swift_error(nonnull_error)));
 
 
 /*!
@@ -116,28 +86,12 @@ NS_SWIFT_NAME(createAuth(amount:merchantAccount:delegate:completion:));
 - (void)createAuthWithAmount:(nonnull CFTAmount *)amount
              merchantAccount:(nonnull CFTMerchantAccount*)merchantAccount
                  callbackUrl:(nullable NSURL*)callbackUrl
-                    metadata:(nullable NSDictionary<NSString*, id>*)metadata
+                    metadata:(nullable NSDictionary<NSString*, NSString*>*)metadata
          isSignatureRequired:(BOOL)isSignatureRequired
           isQuickChipEnabled:(BOOL)isQuickChipEnabled
                     delegate:(nonnull id<CFTTransactionDelegate>)delegate
                   completion:(nonnull CFTTransactionBlock)completion
 NS_SWIFT_NAME(createAuth(amount:merchantAccount:callbackUrl:metadata:isSignatureRequired:isQuickChipEnabled:delegate:completion:));
-
-/*!
- * @brief Creates a new transaction with transaction type refund.
- * @param amount CFTAmount - Amount to refund
- * @param transactionRecord CFTTransactionRecord is the transaction record that is being refunded
- * @param completion CFTTransactionRecordBlock - Block to handle the result of the refund, contains CFTTransactionRecord and NSError
- * @discussion Will attempt to refund with the specified amount against the current transaction. Upon completion,
- * the completion block is triggered indicating the refund attempt has finished and potentially an error if the
- * refund did not complete successfully
- * Added in 4.7.0
- */
-- (void)createRefundWithAmount:(nonnull CFTAmount *)amount
-             transactionRecord:(nonnull CFTTransactionRecord *)transactionRecord
-                    completion:(nullable CFTTransactionRecordBlock)completion
-NS_SWIFT_NAME(refundTransaction(amount:transactionRecord:completion:))
-DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.8.1. Use `createRefund(amount:transactionRecord:transactionDelegate:completion:)` or `createRefund(amount:callbackUrl:metadata:transactionRecord:transactionDelegate:completion:)` instead");
 
 /*!
  * @brief Creates a refund transaction.
@@ -169,36 +123,19 @@ NS_SWIFT_NAME(createRefund(amount:transactionRecord:transactionDelegate:completi
  */
 - (void)createRefundWithAmount:(nonnull CFTAmount *)amount
                    callbackUrl:(nullable NSURL *)callbackUrl
-                      metadata:(nullable NSDictionary<NSString*, id>*)metadata
+                      metadata:(nullable NSDictionary<NSString*, NSString*>*)metadata
              transactionRecord:(nonnull CFTTransactionRecord *)transactionRecord
            transactionDelegate:(nonnull id<CFTTransactionDelegate>)delegate
                     completion:(nullable CFTTransactionBlock)completion
 NS_SWIFT_NAME(createRefund(amount:callbackUrl:metadata:transactionRecord:transactionDelegate:completion:));
 
 /*!
- * @brief Attempt to begin a sale for an amount
- * @param transactionParameters CFTTransactionParameters - TransactionParameters used for sale
- * @param delegate CFTTransactionDelegate - TransactionDelegate used to report events to the transaction
- * @return CFTTransaction - containing the data of the created sale transaction.
- * @throws NSError - Throws error if create sale is failed.
- * @discussion Will attempt to begin a sale. If the state is not CFTTransactionStatePendingTransactionParameters,
- * the transactionDidUpdateState:error callback will respond with an error.
- * Added in 4.7.0
- */
-- (nullable CFTTransaction *)createSaleWithTransactionParameters:(nonnull CFTTransactionParameters *)transactionParameters
-                                                        delegate:(nonnull id<CFTTransactionDelegate>)delegate
-                                                           error:(NSError *_Nullable *_Nullable)error
-NS_SWIFT_NAME(createSale(transactionParameters:delegate:))
-DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.8.1. Use `createSale(amount:merchantAccount:delegate:completion:)` or `createSale(amount:merchantAccount:callbackUrl:metadata:isSignatureRequired:isQuickChipEnabled:delegate:completion:)` instead")
-__attribute__((swift_error(nonnull_error)));
-
-/*!
  * @brief Creates a new transaction with transaction type sale.
- * @param amount CFTAmount - Amount used for transaction
+ * @param amount CFTAmount - Amount used for transaction.
  * @param merchantAccount CFTMerchantAccount - Merchant account used for transaction.
- * @param delegate CFTTransactionDelegate - TransactionDelegate used to report events to the transaction
+ * @param delegate CFTTransactionDelegate - TransactionDelegate used to report events to the transaction.
  * @param completion CFTTransactionBlock - Completion block which will be called with CFTTransaction or NSError upon completion.
- * @discussion Will attempt to begin a sale. If the state is not CFTTransactionStatePendingTransactionParameters,
+ * @discussion Will attempt to begin a sale. If the state is not CFTTransactionStatePendingCardInput,
  * the transactionDidUpdateState:error callback will respond with an error.
  * Added in 4.8.1
  */
@@ -210,7 +147,8 @@ NS_SWIFT_NAME(createSale(amount:merchantAccount:delegate:completion:));
 
 /*!
  * @brief Creates a new transaction with transaction type sale.
- * @param amount CFTAmount - Amount used for transaction
+ * @param amount CFTAmount - Amount used for transaction.
+ * @param networkType CFTNetworkType - Network that the transaction will process over.
  * @param merchantAccount CFTMerchantAccount - Merchant account used for an transaction.
  * @param callbackUrl NSURL - If provided, will be called back with transaction details.
  * @param metadata Any additional information you want saved along with the transaction.
@@ -222,31 +160,15 @@ NS_SWIFT_NAME(createSale(amount:merchantAccount:delegate:completion:));
  * Added in 4.8.1
  */
 - (void)createSaleWithAmount:(nonnull CFTAmount *)amount
+                 networkType:(CFTNetworkType)networkType
              merchantAccount:(nonnull CFTMerchantAccount*)merchantAccount
                  callbackUrl:(nullable NSURL*)callbackUrl
-                    metadata:(nullable NSDictionary<NSString*, id>*)metadata
+                    metadata:(nullable NSDictionary<NSString*, NSString*>*)metadata
          isSignatureRequired:(BOOL) isSignatureRequired
           isQuickChipEnabled:(BOOL) isQuickChipEnabled
                     delegate:(nonnull id<CFTTransactionDelegate>)delegate
                   completion:(nonnull CFTTransactionBlock)completion
-NS_SWIFT_NAME(createSale(amount:merchantAccount:callbackUrl:metadata:isSignatureRequired:isQuickChipEnabled:delegate:completion:));
-
-/*!
- * @brief Attempt to tokenize a card
- * @param tokenizationParameters CFTTokenizationParameters - TokenizationParameters used for tokenize
- * @param delegate CFTTransactionDelegate - TransactionDelegate used to report events to the transaction
- * @return CFTTransaction - containing the data of the created tokenized transaction
- * @throws NSError - Throws error if create tokenization is failed.
- * @discussion Will attempt to begin the process of tokenizing. If the state is not CFTTransactionStatePendingTransactionParameters,
- * the transactionDidUpdateState:error callback will respond with an error.
- * Updated in 4.7.0
- */
-- (nullable CFTTransaction *)createTokenizationWithParameters:(nonnull CFTTokenizationParameters *)tokenizationParameters
-                                                     delegate:(nonnull id<CFTTransactionDelegate>)delegate
-                                                        error:(NSError *_Nullable *_Nullable)error
-NS_SWIFT_NAME(createTokenization(tokenizationParameters:delegate:))
-DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.8.1. Use `createTokenization(merchantAccount:delegate:completion:)` or `createTokenization(merchantAccount:customerId:delegate:completion:)` instead")
-__attribute__((swift_error(nonnull_error)));
+NS_SWIFT_NAME(createSale(amount:networkType:merchantAccount:callbackUrl:metadata:isSignatureRequired:isQuickChipEnabled:delegate:completion:));
 
 /*!
  * @brief  Creates a new transaction with transaction type tokenization.
@@ -311,8 +233,8 @@ NS_SWIFT_NAME(refresh(transactionRecord:completion:));
  */
 - (void)resumeDeferredTransaction:(nonnull NSData *)transactionData
                          delegate:(nonnull id<CFTTransactionDelegate>)delegate
-                       completion:(nonnull CFTTransactionBlock)completion;
-NS_SWIFT_NAME(resumeDeferredTransaction(data:delegate:completion));
+                       completion:(nonnull CFTTransactionBlock)completion
+NS_SWIFT_NAME(resumeDeferredTransaction(data:delegate:completion:));
 
 /*!
  * @brief Get capabilities of a transaction.

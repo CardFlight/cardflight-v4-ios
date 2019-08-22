@@ -420,23 +420,16 @@ typedef NS_ENUM(NSInteger, CFTKeyedEntryContainerEvent) {
 /*!
  * @typedef CFTMerchantAccountCapability
  * @brief Merchant account's capabilities
- * @constant CFTMerchantAccountCapabilityCanProcessTransactions Merchant account can process transactions.
- * @constant CFTMerchantAccountCapabilityCanUseKeyedTransactions Merchant account can use keyed transactions.
- * @constant CFTMerchantAccountCapabilityCanUseAvs Merchant acoount can use AVS.
+ * @constant CFTMerchantAccountCapabilityCanProcessCredit Merchant account can process credit transactions.
  * @constant CFTMerchantAccountCapabilityCanAdjustTransactions Transactions can be adjusted.
- * @constant CFTMerchantAccountCapabilityCanUsePin Merchant account can use pin.
- * @constant CFTMerchantAccountCapabilityCanUseCreditNetwork Merchant account can process transactions over the credit network.
- * @constant CFTMerchantAccountCapabilityCanUseDebitNetwork Merchant account can process transactions over the debit network.
+ * @constant CFTMerchantAccountCapabilityCanDeferTransactions Merchant account can defer transactions.
+ * @constant CFTMerchantAccountCapabilityCanProcessDebit Merchant account can process debit transactions.
  */
 typedef NS_ENUM(NSInteger, CFTMerchantAccountCapability) {
-    CFTMerchantAccountCapabilityCanProcessTransactions NS_SWIFT_NAME(merchantAccountCanProcessTransactions) = 0,
-    CFTMerchantAccountCapabilityCanUseKeyedTransactions NS_SWIFT_NAME(merchantAccountCanUseKeyedTransactions) = 1,
-    CFTMerchantAccountCapabilityCanUseAvs NS_SWIFT_NAME(merchantAccountCanUseAvs) = 2,
-    CFTMerchantAccountCapabilityCanAdjustTransactions NS_SWIFT_NAME(merchantAccountCanAdjustTransactions) = 3,
-    CFTMerchantAccountCapabilityCanGenerateDeferredTransactions NS_SWIFT_NAME(merchantAccountCanGenerateDeferredTransactions) = 4,
-    CFTMerchantAccountCapabilityCanUsePin NS_SWIFT_NAME(merchantAccountCanUsePin) = 5,
-    CFTMerchantAccountCapabilityCanUseCreditNetwork NS_SWIFT_NAME(merchantAccountCanUseCreditNetwork) = 6,
-    CFTMerchantAccountCapabilityCanUseDebitNetwork NS_SWIFT_NAME(merchantAccountCanUseDebitNetwork) = 7
+    CFTMerchantAccountCapabilityCanProcessCredit NS_SWIFT_NAME(merchantAccountCanProcessCredit) = 0,
+    CFTMerchantAccountCapabilityCanAdjustTransactions NS_SWIFT_NAME(merchantAccountCanAdjustTransactions) = 1,
+    CFTMerchantAccountCapabilityCanDeferTransactions NS_SWIFT_NAME(merchantAccountCanDeferTransactions) = 2,
+    CFTMerchantAccountCapabilityCanProcessDebit NS_SWIFT_NAME(merchantAccountCanProcessDebit) = 3
 };
 
 /*!

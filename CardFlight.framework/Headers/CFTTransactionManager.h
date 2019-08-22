@@ -86,7 +86,7 @@ NS_SWIFT_NAME(createAuth(amount:merchantAccount:delegate:completion:));
 - (void)createAuthWithAmount:(nonnull CFTAmount *)amount
              merchantAccount:(nonnull CFTMerchantAccount*)merchantAccount
                  callbackUrl:(nullable NSURL*)callbackUrl
-                    metadata:(nullable NSDictionary<NSString*, NSString*>*)metadata
+                    metadata:(nullable NSDictionary<NSString*, id>*)metadata
          isSignatureRequired:(BOOL)isSignatureRequired
           isQuickChipEnabled:(BOOL)isQuickChipEnabled
                     delegate:(nonnull id<CFTTransactionDelegate>)delegate
@@ -123,7 +123,7 @@ NS_SWIFT_NAME(createRefund(amount:transactionRecord:transactionDelegate:completi
  */
 - (void)createRefundWithAmount:(nonnull CFTAmount *)amount
                    callbackUrl:(nullable NSURL *)callbackUrl
-                      metadata:(nullable NSDictionary<NSString*, NSString*>*)metadata
+                      metadata:(nullable NSDictionary<NSString*, id>*)metadata
              transactionRecord:(nonnull CFTTransactionRecord *)transactionRecord
            transactionDelegate:(nonnull id<CFTTransactionDelegate>)delegate
                     completion:(nullable CFTTransactionBlock)completion
@@ -163,7 +163,7 @@ NS_SWIFT_NAME(createSale(amount:merchantAccount:delegate:completion:));
                  networkType:(CFTNetworkType)networkType
              merchantAccount:(nonnull CFTMerchantAccount*)merchantAccount
                  callbackUrl:(nullable NSURL*)callbackUrl
-                    metadata:(nullable NSDictionary<NSString*, NSString*>*)metadata
+                    metadata:(nullable NSDictionary<NSString*, id>*)metadata
          isSignatureRequired:(BOOL) isSignatureRequired
           isQuickChipEnabled:(BOOL) isQuickChipEnabled
                     delegate:(nonnull id<CFTTransactionDelegate>)delegate

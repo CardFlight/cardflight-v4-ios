@@ -1,3 +1,6 @@
+### 4.8.7
+ * Added
+    * Simplify merchant capabilities.
 ### 4.8.6
  * Added
     * Added external transaction state of PendingAdjustment.

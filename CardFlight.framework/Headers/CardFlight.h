@@ -28,9 +28,8 @@
 #import <CardFlight/CFTPermissions.h>
 #import <CardFlight/CFTReaderUtilities.h>
 #import <CardFlight/CFTSessionManager.h>
-#import <Cardflight/CFTTokenizationParameters.h>
 #import <CardFlight/CFTTransaction.h>
 #import <CardFlight/CFTTransactionManager.h>
-#import <CardFlight/CFTTransactionParameters.h>
 #import <CardFlight/CFTTransactionRecord.h>
 #import <CardFlight/CFTDeviceManager.h>
+#import <CardFlight/CFTAdjustment.h>

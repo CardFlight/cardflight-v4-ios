@@ -1,6 +1,14 @@
+### 4.8.8
+  * Added
+    * More properties available on CFTTransaction
+    * Adjustment object
+    * Attaching an adjustment to a transaction
+    * Pending Adjustment transaction state
+
 ### 4.8.7
- * Added
+  * Added
     * Simplify merchant capabilities.
+
 ### 4.8.6
  * Added
     * Added external transaction state of PendingAdjustment.
@@ -8,17 +16,20 @@
     * Added Debit routing.
  * Fixed
       * Resume deferred transaction crash.
+
 ### 4.8.5
  * Added
     * Updated metadata's type in CFTTransactionManager methods.
+
 ### 4.8.4
-* Added
+ * Added
     * Interface updates.
     * Bug fixes.
+
 ### 4.8.0
-* Changed
+ * Changed
      * Interface updates
-* Added
+ * Added
      * Can keep reader connection alive using Reader utilities.
      * EMV receipt details.
      * CVV keyed entry validation

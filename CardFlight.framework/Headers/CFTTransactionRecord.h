@@ -111,7 +111,6 @@
  */
 @property (nonatomic, readonly, copy, nullable) NSString *referenceId;
 
-
 /*!
  * @property result
  * @brief Result of the Transaction

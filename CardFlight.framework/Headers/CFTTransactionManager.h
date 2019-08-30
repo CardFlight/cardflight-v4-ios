@@ -12,8 +12,6 @@
 
 @class CFTAmount;
 @class CFTMerchantAccount;
-@class CFTTransactionParameters;
-@class CFTTokenizationParameters;
 @class CFTTransaction;
 
 @protocol CFTTransactionDelegate;
@@ -152,6 +150,7 @@ NS_SWIFT_NAME(createSale(amount:merchantAccount:delegate:completion:));
  * @param merchantAccount CFTMerchantAccount - Merchant account used for an transaction.
  * @param callbackUrl NSURL - If provided, will be called back with transaction details.
  * @param metadata Any additional information you want saved along with the transaction.
+ * @param isAdjustmentRequested Whether or not you want an adjustment to be requested on transactions.
  * @param isSignatureRequired Whether or not you want signature requested on `key`and `swiped`transactions.
  * @param isQuickChipEnabled Whether or not you want `quick chip` transactions enabled.
  * @param delegate CFTTransactionDelegate - TransactionDelegate used to report events to the transaction
@@ -164,11 +163,12 @@ NS_SWIFT_NAME(createSale(amount:merchantAccount:delegate:completion:));
              merchantAccount:(nonnull CFTMerchantAccount*)merchantAccount
                  callbackUrl:(nullable NSURL*)callbackUrl
                     metadata:(nullable NSDictionary<NSString*, id>*)metadata
+       isAdjustmentRequested:(BOOL) isAdjustmentRequested
          isSignatureRequired:(BOOL) isSignatureRequired
           isQuickChipEnabled:(BOOL) isQuickChipEnabled
                     delegate:(nonnull id<CFTTransactionDelegate>)delegate
                   completion:(nonnull CFTTransactionBlock)completion
-NS_SWIFT_NAME(createSale(amount:networkType:merchantAccount:callbackUrl:metadata:isSignatureRequired:isQuickChipEnabled:delegate:completion:));
+NS_SWIFT_NAME(createSale(amount:networkType:merchantAccount:callbackUrl:metadata:isAdjustmentRequested:isSignatureRequired:isQuickChipEnabled:delegate:completion:));
 
 /*!
  * @brief  Creates a new transaction with transaction type tokenization.

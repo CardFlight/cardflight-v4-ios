@@ -14,13 +14,13 @@
 @class CFTCardInfo;
 @class CFTCardReaderInfo;
 @class CFTCardAID;
-@class CFTTransactionParameters;
-@class CFTTokenizationParameters;
 @class CFTAmount;
 @class CFTKeyedEntryView;
+@class CFTMerchantAccount;
 @class CFTMessage;
 @class CFTKeyedEntryContainer;
 @class CFTTransactionRecord;
+@class CFTAdjustment;
 
 @protocol CFTTransactionDelegate;
 
@@ -34,19 +34,83 @@
 @property (nonatomic, readwrite, weak, nullable) id <CFTTransactionDelegate> delegate;
 
 /*!
- * @property transactionParameters
- * @brief Transaction Parameters used by the Transaction
- * Added in 4.0.0
+ * @property amount
+ * @brief Amount to process
+ * Added in 4.8.8
  */
-@property (nonatomic, readonly, strong, nullable) CFTTransactionParameters *transactionParameters;
+@property (nonatomic, readonly, strong, nullable) CFTAmount *amount;
 
 /*!
- * @property tokenizationParameters
- * @brief Tokenization Parameters used by the Transaction
- * Added in 4.3.0
+ * @property merchant account
+ * @brief MerchantAccount to use for processing
+ * Added in 4.8.8
  */
-@property (nonatomic, readonly, strong, nullable) CFTTokenizationParameters *tokenizationParameters;
+@property (nonatomic, readonly, strong, nullable) CFTMerchantAccount *merchantAccount;
 
+/*!
+ * @property callbackUrl
+ * @brief If a callback url is specified, the CardFlight Gateway will provide that url with all transaction details.
+ * Added in 4.8.8
+ */
+@property (nonatomic, readonly, strong, nullable) NSURL *callbackUrl;
+
+/*!
+ * @property isSignatureRequired
+ * @brief The boolean for requesting a signature is only honored for keyed and swiped transactions.
+ * The CardFlight Gateway decides whether to request a signature for all other card input methods used.
+ * Added in 4.8.8
+ */
+@property (nonatomic, readonly, assign) BOOL isSignatureRequired;
+
+/*!
+ * @property isQuickChipEnabled
+ * @brief The boolean is for weather or not quick chip is enabled.
+ * Added in 4.8.8
+ */
+@property (nonatomic, readonly, assign) BOOL isQuickChipEnabled;
+
+/*!
+ * @property metadata
+ * @brief The metadata hash is used to store any additional information with a Transaction on the CardFlight Gateway.
+ * This data will also be sent to the callback url if one was provided.
+ * Added in 4.8.8
+ */
+@property (nonatomic, readonly, strong, nullable) NSDictionary<NSString *, id> *metadata;
+
+/*!
+ * @property cardInfo
+ * @brief Card Info used by the Transaction.
+ * Added in 4.8.8
+ */
+@property (nonatomic, readonly, strong, nullable) CFTCardInfo *cardInfo;
+
+/*!
+ * @property cvm
+ * @brief Cardholder verification method used by the Transaction.
+ * Added in 4.8.8
+ */
+@property (nonatomic, readonly, assign) CFTCVM cvm;
+
+/*!
+ * @property message
+ * @brief Message object containing the message from the result of Transaction.
+ * Added in 4.8.8
+ */
+@property (nonatomic, readonly, strong, nullable) CFTMessage *message;
+
+/*!
+ * @property transactionRecord
+ * @brief Transaction record created after the Transaction is complete.
+ * Added in 4.8.8
+ */
+@property (nonatomic, readonly, strong, nullable) CFTTransactionRecord *transactionRecord;
+
+/*!
+ * @property adjustment
+ * @brief Adjustment applied to the Transaction.
+ * Added in 4.8.8
+ */
+@property (nonatomic, readonly, strong, nullable) CFTAdjustment *adjustment;
 
 /*!
  * @property reachability
@@ -145,36 +209,6 @@ NS_SWIFT_NAME(keyedEntryContainer());
 NS_SWIFT_NAME(useKeyedCardInfo());
 
 /*!
- * @brief Attempt to begin a sale for an amount
- * @param transactionParameters CFTTransactionParameters - TransactionParameters used for sale
- * @discussion Will attempt to begin a sale. If the state is not CFTTransactionStatePendingTransactionParameters,
- * the transactionDidUpdateState:error callback will respond with an error.
- * Added in 4.0.0
- */
-- (void)beginSaleWithTransactionParameters:(nonnull CFTTransactionParameters *)transactionParameters
-NS_SWIFT_NAME(beginSale(transactionParameters:));
-
-/*!
- * @brief Attempt to authorize an amount
- * @param transactionParameters CFTTransactionParameters - TransactionParameters used for authorization
- * @discussion Will attempt to begin an authorization. If the state is not CFTTransactionStatePendingTransactionParameters,
- * the transactionDidUpdateState:error callback will respond with an error.
- * Added in 4.0.0
- */
-- (void)beginAuthorizationWithTransactionParameters:(nonnull CFTTransactionParameters *)transactionParameters
-NS_SWIFT_NAME(beginAuthorization(transactionParameters:));
-
-/*!
- * @brief Attempt to tokenize a card
- * @param tokenizationParameters CFTTokenizationParameters - TokenizationParameters used for tokenize
- * @discussion Will attempt to begin the process of tokenizing. If the state is not CFTTransactionStatePendingTransactionParameters,
- * the transactionDidUpdateState:error callback will respond with an error.
- * Updated in 4.3.0
- */
-- (void)beginTokenizingWithParameters:(nonnull CFTTokenizationParameters *)tokenizationParameters
-NS_SWIFT_NAME(beginTokenizing(tokenizationParameters:));
-
-/*!
  * @brief Select a CFTCardAID to use for the transaction
  * @param cardAid CFTCardAID
  * @discussion Will use the card application identifier.
@@ -182,6 +216,16 @@ NS_SWIFT_NAME(beginTokenizing(tokenizationParameters:));
  */
 - (void)selectCardAid:(nonnull CFTCardAID *)cardAid
 NS_SWIFT_NAME(select(cardAid:));
+
+
+/**
+ * Attach an adjustment to the transaction. This should only be called after receiving the
+ * `CFTTransaction`'s `didRequestAdjustment:` callback.
+ *
+ * @param adjustment Adjustment containing all adjustment information for the transaction.
+ */
+- (void)attachAdjustment:(nonnull CFTAdjustment*)adjustment
+NS_SWIFT_NAME(attach(adjustment:));
 
 /*!
  * @brief Specify how to process the transaction
@@ -202,16 +246,6 @@ NS_SWIFT_NAME(select(processOption:));
  */
 - (void)attachSignature:(nullable UIImage *)signatureImage
 NS_SWIFT_NAME(attach(signature:));
-
-/*!
- * @brief Private method
- * @param parameter1 id - First parameter of the method
- * @param parameter2 id - Second parameter of the method
- * @discussion This is only to be used by clients who have made arrangements with CardFlight
- * Added in 4.1.0
- */
-- (void)privateFunctionOne:(nullable id)parameter1 withParameter2:(nullable id)parameter2
-NS_SWIFT_NAME(privateFunctionOne(_:with:));
 
 @end
 
@@ -366,5 +400,14 @@ NS_SWIFT_NAME(transaction(_:didUpdate:));
  */
 - (void)transaction:(nonnull CFTTransaction *)transaction didRequestCardAidSelection:(nonnull NSArray<CFTCardAID *> *)cardAidArray
 NS_SWIFT_NAME(transaction(_:didRequestCardAidSelection:));
+
+
+/**
+ Adjustment requested.
+
+ @param transaction `CFTTransaction` this method needs to add adjustment for.
+ */
+- (void)didRequestAdjustmentForTransaction:(nonnull CFTTransaction*)transaction
+NS_SWIFT_NAME(didRequestAdjustmentFor(transaction:));
 
 @end

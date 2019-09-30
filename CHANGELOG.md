@@ -1,3 +1,7 @@
+### 4.9.0
+  * Added
+    * Merchant Settlement Scheme on CFTMerchantAccount
+
 ### 4.8.8
   * Added
     * More properties available on CFTTransaction

@@ -463,3 +463,20 @@ typedef NS_ENUM(NSInteger, CFTNetworkType) {
     CFTNetworkTypeCredit NS_SWIFT_NAME(credit) = 0,
     CFTNetworkTypeDebit NS_SWIFT_NAME(debit) = 1
 };
+
+/*!
+ * @typedef CFTMerchantAccountSettlementScheme
+ * @brief Settlement scheme for a merchant account
+ * @constant CFTMerchantAccountSettlementSchemeUnknown Unknown settlement scheme.
+ * @constant CFTMerchantAccountSettlementSchemeBroadPosAuto Auto settlement scheme from BroadPOS.
+ * @constant CFTMerchantAccountSettlementSchemeBroadPosManual Manual settlement scheme from BroadPOS.
+ * @constant CFTMerchantAccountSettlementSchemeHostAuto Auto settlement scheme from Host.
+ * @constant CFTMerchantAccountSettlementSchemeGatewayAuto Auto settlement scheme from Gateway.
+ */
+typedef NS_ENUM(NSInteger, CFTMerchantAccountSettlementScheme) {
+    CFTMerchantAccountSettlementSchemeUnknown = 0,
+    CFTMerchantAccountSettlementSchemeBroadPosAuto = 1,
+    CFTMerchantAccountSettlementSchemeBroadPosManual = 2,
+    CFTMerchantAccountSettlementSchemeHostAuto = 3,
+    CFTMerchantAccountSettlementSchemeGatewayAuto = 4
+};

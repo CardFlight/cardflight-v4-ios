@@ -11,6 +11,7 @@
 #import "CFTConstants.h"
 
 @class CFTPermissions;
+@class CFTSettlement;
 
 @interface CFTMerchantAccount : NSObject
 
@@ -69,6 +70,13 @@
  * Added in 4.7.0
  */
 @property (nonatomic, readonly, copy, nullable) CFTPermissions *permissions;
+
+/*!
+ * @property settlement
+ * @brief Settlement details of the merchant account.
+ * Added in 4.8.9
+ */
+@property (nonatomic, readonly, copy, nullable) CFTSettlement *settlement;
 
 /*!
  * @property processor

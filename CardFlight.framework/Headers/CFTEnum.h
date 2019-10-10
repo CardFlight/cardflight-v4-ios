@@ -281,20 +281,11 @@ typedef NS_ENUM(NSInteger, CFTApiTransactionState) {
 typedef NS_ENUM(NSInteger, CFTCardBrand) {
     CFTCardBrandUnknown NS_SWIFT_NAME(unknown) = 0,
     CFTCardBrandAmericanExpress NS_SWIFT_NAME(americanExpress) = 1,
-    CFTCardBrandChinaUnionPay NS_SWIFT_NAME(chinaUnionPay) = 2,
-    CFTCardBrandDinersClubCarteBlanche NS_SWIFT_NAME(dinersClubCarteBlanche) = 3,
-    CFTCardBrandDinersClubInternational NS_SWIFT_NAME(dinersClubInternational) = 4,
-    CFTCardBrandDiscoverCard NS_SWIFT_NAME(discoverCard) = 5,
-    CFTCardBrandInterpayment NS_SWIFT_NAME(interpayment) = 6,
-    CFTCardBrandInstapayment NS_SWIFT_NAME(instapayment) = 7,
-    CFTCardBrandJCB NS_SWIFT_NAME(JCB) = 8,
-    CFTCardBrandMaestro NS_SWIFT_NAME(maestro) = 9,
-    CFTCardBrandDankort NS_SWIFT_NAME(dankort) = 10,
-    CFTCardBrandMastercard NS_SWIFT_NAME(mastercard) = 11,
-    CFTCardBrandVisa NS_SWIFT_NAME(visa) = 12,
-    CFTCardBrandUATP NS_SWIFT_NAME(UATP) = 13,
-    CFTCardBrandVerve NS_SWIFT_NAME(verve) = 14,
-    CFTCardBrandCardGuard NS_SWIFT_NAME(cardguard) = 15
+    CFTCardBrandDinersClub NS_SWIFT_NAME(dinersClub) = 2,
+    CFTCardBrandDiscoverCard NS_SWIFT_NAME(discoverCard) = 3,
+    CFTCardBrandJCB NS_SWIFT_NAME(JCB) = 4,
+    CFTCardBrandMastercard NS_SWIFT_NAME(mastercard) = 5,
+    CFTCardBrandVisa NS_SWIFT_NAME(visa) = 6
 };
 
 /*

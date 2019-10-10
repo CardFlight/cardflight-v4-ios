@@ -1,3 +1,7 @@
+### 4.10.0
+  * Changed
+    * All instances of CFTError are now CFTGeneralError instances
+
 ### 4.9.0
   * Added
     * Merchant Settlement Scheme on CFTMerchantAccount

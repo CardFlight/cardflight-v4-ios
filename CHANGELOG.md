@@ -1,3 +1,7 @@
+### 4.10.1
+  * Fixed
+    * Various bug fixes and performance improvements
+
 ### 4.10.0
   * Changed
     * All instances of CFTError are now CFTGeneralError instances

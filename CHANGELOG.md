@@ -1,3 +1,7 @@
+### 4.6.5
+* Fixed
+  * Fixed bug that caused receipts to print with errors.
+
 ### 4.6.4
 * Fixed
 * Credential validation(regression from 4.6.3) for devices running  **< iOS 10.3**

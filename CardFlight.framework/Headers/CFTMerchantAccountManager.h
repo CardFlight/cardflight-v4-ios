@@ -58,16 +58,16 @@ NS_SWIFT_NAME(privateFunctionOne(merchantAccount:_:));
 NS_SWIFT_NAME(privateFunctionTwo(merchantAccount:_:));
 
 /*!
- * @brief Trigger a validation of the merchant account with the CardFlight Gateway
+ * @brief Fetch merchant account from the CardFlight gateway
  * @param merchantAccount - MerchantAccount
  * @param completion Block trigged upon upon completion of network request.
  * @discussion - Force the API Key and Merchant Account ID originally provided to be re-validated using the CardFlight Gateway.
  * This is useful if the Merchant Account object being used has timed out or has errored in some other way.
  * Added in 4.7.0
  */
-- (void) validateWithMerchantAccount:(nonnull CFTMerchantAccount *)merchantAccount
+- (void) fetchWithMerchantAccount:(nonnull CFTMerchantAccount *)merchantAccount
                           completion:(void(^ _Nullable)(BOOL success, NSError * _Nullable error))completion
-NS_SWIFT_NAME(validate(merchantAccount:completion:));
+NS_SWIFT_NAME(fetch(merchantAccount:completion:));
 
 /*!
  * @brief Returns any current error with the merchant account

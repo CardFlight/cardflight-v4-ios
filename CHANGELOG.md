@@ -1,3 +1,9 @@
+### 4.11.0
+  * Changed
+    * Transaction record indicates network transaction was processed over.
+  * Fixed
+    * Rename abort to cancel.
+    
 ### 4.10.1
   * Fixed
     * Various bug fixes and performance improvements

@@ -122,7 +122,7 @@ typedef NS_ENUM(NSInteger, CFTCardInputMethod) {
  * @constant CFTProcessOptionUnknown Unknown option, should not occur in normal operation
  * @constant CFTProcessOptionProcess Process the transaction online normally
  * @constant CFTProcessOptionDefer Save the transaction to process at a later date
- * @constant CFTProcessOptionAbort Cancel the transaction without processing
+ * @constant CFTProcessOptionCancel Cancel the transaction without processing
  * @discussion Transactions can either be processed online, saved for later processing, or canceled without processing.
  * Added in 4.0.0
  */
@@ -130,7 +130,7 @@ typedef NS_ENUM(NSInteger, CFTProcessOption) {
     CFTProcessOptionUnknown NS_SWIFT_NAME(unknown) = 0,
     CFTProcessOptionProcess NS_SWIFT_NAME(process) = 1,
     CFTProcessOptionDefer NS_SWIFT_NAME(defer) = 2,
-    CFTProcessOptionAbort NS_SWIFT_NAME(abort) = 3
+    CFTProcessOptionCancel NS_SWIFT_NAME(cancel) = 3
 };
 
 /*!
@@ -157,7 +157,7 @@ typedef NS_ENUM(NSInteger, CFTCVM) {
  * @constant CFTTransactionResultApproved Transaction was approved online
  * @constant CFTTransactionResultDeclined Transaction was declined online
  * @constant CFTTransactionResultErrored Transaction encountered an error
- * @constant CFTTransactionResultAborted Transaction was cancelled before processing
+ * @constant CFTTransactionResultCanceled Transaction was canceled before processing
  * @constant CFTTransactionResultVoided Transaction was voided before it batched out
  * @discussion The final outcome of a transaction
  * Updated in 4.1.0
@@ -167,7 +167,7 @@ typedef NS_ENUM(NSInteger, CFTTransactionResult) {
     CFTTransactionResultApproved NS_SWIFT_NAME(approved) = 1,
     CFTTransactionResultDeclined NS_SWIFT_NAME(declined) = 2,
     CFTTransactionResultErrored NS_SWIFT_NAME(errored) = 3,
-    CFTTransactionResultAborted NS_SWIFT_NAME(aborted) = 4,
+    CFTTransactionResultCanceled NS_SWIFT_NAME(canceled) = 4,
     CFTTransactionResultVoided NS_SWIFT_NAME(voided) = 5
 };
 
@@ -238,6 +238,7 @@ typedef NS_ENUM(NSInteger, CFTApiTransactionStatus) {
  * @constant CFTApiTransactionStateVoided Transaction voided, funds are released to cardholder and no money is moved.
  * @constant CFTApiTransactionStateDeclined Authorization, Sale, or Refund request declined.
  * @constant CFTApiTransactionStateSettled Capture, Sale, or Refund settled.
+ * @constant CFTApiTransactionStateCanceled Sale or Refund canceled.
  * @discussion This status mirrors the transaction status available from the Cardflight API
  * Added in 4.1.0
  */
@@ -250,8 +251,8 @@ typedef NS_ENUM(NSInteger, CFTApiTransactionState) {
     CFTApiTransactionStatePendingVoid NS_SWIFT_NAME(pendingVoid) = 5,
     CFTApiTransactionStateVoided NS_SWIFT_NAME(voided) = 6,
     CFTApiTransactionStateDeclined NS_SWIFT_NAME(declined) = 7,
-    CFTApiTransactionStateSettled NS_SWIFT_NAME(settled) = 8
-    
+    CFTApiTransactionStateSettled NS_SWIFT_NAME(settled) = 8,
+    CFTApiTransactionStateCanceled NS_SWIFT_NAME(canceled) = 9,
 };
 
 /*!
@@ -447,12 +448,14 @@ typedef NS_ENUM(NSInteger, CFTDeviceManagerCapability) {
 /*!
  * @typedef CFTNetworkType
  * @brief Network type for a transaction
+ * @constant CFTNetworkTypeUnknown Transaction is processed over an unknown network.
  * @constant CFTNetworkTypeCredit Transaction is processed over the credit network.
  * @constant CFTNetworkTypeDebit Transaction is processed over the debit network.
  */
 typedef NS_ENUM(NSInteger, CFTNetworkType) {
-    CFTNetworkTypeCredit NS_SWIFT_NAME(credit) = 0,
-    CFTNetworkTypeDebit NS_SWIFT_NAME(debit) = 1
+    CFTNetworkTypeUnknown NS_SWIFT_NAME(unknown) = 0,
+    CFTNetworkTypeCredit NS_SWIFT_NAME(credit) = 1,
+    CFTNetworkTypeDebit NS_SWIFT_NAME(debit) = 2
 };
 
 /*!

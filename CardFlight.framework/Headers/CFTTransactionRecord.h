@@ -105,6 +105,13 @@
 @property (nonatomic, readonly, strong, nullable) NSDictionary *metadata;
 
 /*!
+ * @property networkType
+ * @brief The network a transaction has been processed over.
+ * Added in 4.11.0
+ */
+@property (nonatomic, readonly, assign) CFTNetworkType networkType;
+
+/*!
  * @property referenceId
  * @brief Reference number of the transaction
  * Updated in 4.1.0

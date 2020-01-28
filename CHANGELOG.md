@@ -52,9 +52,13 @@
      * EMV receipt details.
      * CVV keyed entry validation
 
+### 4.6.6
+* Fixed
+  * Cardholder information bugs for devices running **<= iOS 13.0**
+
 ### 4.6.4
 * Fixed
-* Credential validation(regression from 4.6.3) for devices running  **< iOS 10.3**
+  * Credential validation(regression from 4.6.3) for devices running  **< iOS 10.3**
 
 ### 4.6.3
 * Fixed

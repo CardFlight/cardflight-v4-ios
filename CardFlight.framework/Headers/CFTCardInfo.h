@@ -9,7 +9,6 @@
 
 #import <Foundation/Foundation.h>
 #import "CFTEnum.h"
-#import "CFTEmvDetails.h"
 
 @interface CFTCardInfo : NSObject
 
@@ -68,13 +67,6 @@
  * Added in 4.2.0
  */
 @property (nonatomic, readonly, copy, nullable) NSString *applicationPreferredName;
-
-/*!
- * @property emvDetails
- * @brief EMV details.
- * Added in 4.7.0
- */
-@property (nonatomic, readonly, strong, nullable) CFTEmvDetails *emvDetails;
 
 /*!
  * @property cardholderName

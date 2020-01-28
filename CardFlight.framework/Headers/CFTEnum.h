@@ -18,8 +18,6 @@
  * @constant CFTTransactionStateProcessing Transaction is currently processing the payment
  * @constant CFTTransactionStateCompleted Transaction has finished processing
  * @constant CFTTransactionStateDeferred Transaction has been deferred and must be resumed using deferred transaction data
- * @constant CFTTransactionStatePendingCvm Transaction is in pending CVM state and requires transaction to attach signature
- * @constant CFTTransactionStatePendingAdjustment Transaction is in pending adjustment state and requires the transaction to attach a tip
  * @discussion Current public state of the transaction
  * Most transactions will proceed through all 5 states in linear order.
  * The current state can be used to determine the flow of control in the host application.
@@ -32,9 +30,7 @@ typedef NS_ENUM(NSInteger, CFTTransactionState) {
     CFTTransactionStatePendingProcessOption NS_SWIFT_NAME(pendingProcessOption) = 3,
     CFTTransactionStateProcessing NS_SWIFT_NAME(processing) = 4,
     CFTTransactionStateCompleted NS_SWIFT_NAME(completed) = 5,
-    CFTTransactionStateDeferred NS_SWIFT_NAME(deferred) = 6,
-    CFTTransactionStatePendingCvm NS_SWIFT_NAME(pendingCvm) = 7,
-    CFTTransactionStatePendingAdjustment NS_SWIFT_NAME(pendingAdjustment) = 8
+    CFTTransactionStateDeferred NS_SWIFT_NAME(deferred) = 6
 };
 
 /*!
@@ -122,7 +118,7 @@ typedef NS_ENUM(NSInteger, CFTCardInputMethod) {
  * @constant CFTProcessOptionUnknown Unknown option, should not occur in normal operation
  * @constant CFTProcessOptionProcess Process the transaction online normally
  * @constant CFTProcessOptionDefer Save the transaction to process at a later date
- * @constant CFTProcessOptionCancel Cancel the transaction without processing
+ * @constant CFTProcessOptionAbort Cancel the transaction without processing
  * @discussion Transactions can either be processed online, saved for later processing, or canceled without processing.
  * Added in 4.0.0
  */
@@ -130,7 +126,7 @@ typedef NS_ENUM(NSInteger, CFTProcessOption) {
     CFTProcessOptionUnknown NS_SWIFT_NAME(unknown) = 0,
     CFTProcessOptionProcess NS_SWIFT_NAME(process) = 1,
     CFTProcessOptionDefer NS_SWIFT_NAME(defer) = 2,
-    CFTProcessOptionCancel NS_SWIFT_NAME(cancel) = 3
+    CFTProcessOptionAbort NS_SWIFT_NAME(abort) = 3
 };
 
 /*!
@@ -139,15 +135,13 @@ typedef NS_ENUM(NSInteger, CFTProcessOption) {
  * @constant CFTCVMUnknown Unknown CVM, should not occur in normal operation
  * @constant CFTCVMNone No CVM requested
  * @constant CFTCVMSignature Signature CVM requested
- * @constant CFTCVMPin Pin CVM requested
  * @discussion All currently supported cardholder verification methods
  * Added in 4.0.0
  */
 typedef NS_ENUM(NSInteger, CFTCVM) {
     CFTCVMUnknown NS_SWIFT_NAME(unknown) = 0,
     CFTCVMNone NS_SWIFT_NAME(none) = 1,
-    CFTCVMSignature NS_SWIFT_NAME(signature) = 2,
-    CFTCVMPin NS_SWIFT_NAME(pin) = 3
+    CFTCVMSignature NS_SWIFT_NAME(signature) = 2
 };
 
 /*!
@@ -157,7 +151,7 @@ typedef NS_ENUM(NSInteger, CFTCVM) {
  * @constant CFTTransactionResultApproved Transaction was approved online
  * @constant CFTTransactionResultDeclined Transaction was declined online
  * @constant CFTTransactionResultErrored Transaction encountered an error
- * @constant CFTTransactionResultCanceled Transaction was canceled before processing
+ * @constant CFTTransactionResultAborted Transaction was cancelled before processing
  * @constant CFTTransactionResultVoided Transaction was voided before it batched out
  * @discussion The final outcome of a transaction
  * Updated in 4.1.0
@@ -167,7 +161,7 @@ typedef NS_ENUM(NSInteger, CFTTransactionResult) {
     CFTTransactionResultApproved NS_SWIFT_NAME(approved) = 1,
     CFTTransactionResultDeclined NS_SWIFT_NAME(declined) = 2,
     CFTTransactionResultErrored NS_SWIFT_NAME(errored) = 3,
-    CFTTransactionResultCanceled NS_SWIFT_NAME(canceled) = 4,
+    CFTTransactionResultAborted NS_SWIFT_NAME(aborted) = 4,
     CFTTransactionResultVoided NS_SWIFT_NAME(voided) = 5
 };
 
@@ -197,7 +191,6 @@ typedef NS_ENUM(NSInteger, CFTTransactionType) {
     CFTTransactionTypeTokenization NS_SWIFT_NAME(tokenization) = 4
 };
 
-DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.8.0. Use 'CFTApiTransactionState' instead")
 /*!
  * @typedef CFTApiTransactionStatus
  * @bried The current status of the historical transaction
@@ -227,35 +220,6 @@ typedef NS_ENUM(NSInteger, CFTApiTransactionStatus) {
 };
 
 /*!
- * @typedef CFTApiTransactionState
- * @bried The current status of the transaction record
- * @constant CFTTransactionTypeUnknown Unknown state. An error has occurred.
- * @constant CFTApiTransactionStatePendingPreApproved Authorization requested, awaiting result.
- * @constant CFTApiTransactionStatePreApproved Authorization approved, cardholder statement shows funds as `PENDING`.
- * @constant CFTApiTransactionStatePendingApproved Sale, Capture, or Refund requested, awaiting result.
- * @constant CFTApiTransactionStateApproved Sale, Capture, or Refund approved, funds to be moved between merchant and cardholder.
- * @constant CFTApiTransactionStatePendingVoid Void requested, awaiting result.
- * @constant CFTApiTransactionStateVoided Transaction voided, funds are released to cardholder and no money is moved.
- * @constant CFTApiTransactionStateDeclined Authorization, Sale, or Refund request declined.
- * @constant CFTApiTransactionStateSettled Capture, Sale, or Refund settled.
- * @constant CFTApiTransactionStateCanceled Sale or Refund canceled.
- * @discussion This status mirrors the transaction status available from the Cardflight API
- * Added in 4.1.0
- */
-typedef NS_ENUM(NSInteger, CFTApiTransactionState) {
-    CFTApiTransactionStateUnknown NS_SWIFT_NAME(unknown) = 0,
-    CFTApiTransactionStatePendingPreApproved NS_SWIFT_NAME(pendingPreApproved) = 1,
-    CFTApiTransactionStatePreApproved NS_SWIFT_NAME(preApproved) = 2,
-    CFTApiTransactionStatePendingApproved NS_SWIFT_NAME(pendingApproved) = 3,
-    CFTApiTransactionStateApproved NS_SWIFT_NAME(approved) = 4,
-    CFTApiTransactionStatePendingVoid NS_SWIFT_NAME(pendingVoid) = 5,
-    CFTApiTransactionStateVoided NS_SWIFT_NAME(voided) = 6,
-    CFTApiTransactionStateDeclined NS_SWIFT_NAME(declined) = 7,
-    CFTApiTransactionStateSettled NS_SWIFT_NAME(settled) = 8,
-    CFTApiTransactionStateCanceled NS_SWIFT_NAME(canceled) = 9,
-};
-
-/*!
  * @typedef CFTCardBrand
  * @brief All recognized card brands
  * @constant CFTCardBrandUnknown Card doesn't match any known configuration
@@ -282,11 +246,20 @@ typedef NS_ENUM(NSInteger, CFTApiTransactionState) {
 typedef NS_ENUM(NSInteger, CFTCardBrand) {
     CFTCardBrandUnknown NS_SWIFT_NAME(unknown) = 0,
     CFTCardBrandAmericanExpress NS_SWIFT_NAME(americanExpress) = 1,
-    CFTCardBrandDinersClub NS_SWIFT_NAME(dinersClub) = 2,
-    CFTCardBrandDiscoverCard NS_SWIFT_NAME(discoverCard) = 3,
-    CFTCardBrandJCB NS_SWIFT_NAME(JCB) = 4,
-    CFTCardBrandMastercard NS_SWIFT_NAME(mastercard) = 5,
-    CFTCardBrandVisa NS_SWIFT_NAME(visa) = 6
+    CFTCardBrandChinaUnionPay NS_SWIFT_NAME(chinaUnionPay) = 2,
+    CFTCardBrandDinersClubCarteBlanche NS_SWIFT_NAME(dinersClubCarteBlanche) = 3,
+    CFTCardBrandDinersClubInternational NS_SWIFT_NAME(dinersClubInternational) = 4,
+    CFTCardBrandDiscoverCard NS_SWIFT_NAME(discoverCard) = 5,
+    CFTCardBrandInterpayment NS_SWIFT_NAME(interpayment) = 6,
+    CFTCardBrandInstapayment NS_SWIFT_NAME(instapayment) = 7,
+    CFTCardBrandJCB NS_SWIFT_NAME(JCB) = 8,
+    CFTCardBrandMaestro NS_SWIFT_NAME(maestro) = 9,
+    CFTCardBrandDankort NS_SWIFT_NAME(dankort) = 10,
+    CFTCardBrandMastercard NS_SWIFT_NAME(mastercard) = 11,
+    CFTCardBrandVisa NS_SWIFT_NAME(visa) = 12,
+    CFTCardBrandUATP NS_SWIFT_NAME(UATP) = 13,
+    CFTCardBrandVerve NS_SWIFT_NAME(verve) = 14,
+    CFTCardBrandCardGuard NS_SWIFT_NAME(cardguard) = 15
 };
 
 /*
@@ -408,69 +381,3 @@ typedef NS_ENUM(NSInteger, CFTKeyedEntryContainerEvent) {
     CFTKeyedEntryContainerEventAvsComplete NS_SWIFT_NAME(avsComplete) = 4
 };
 
-
-/*!
- * @typedef CFTMerchantAccountCapability
- * @brief Merchant account's capabilities
- * @constant CFTMerchantAccountCapabilityCanProcessCredit Merchant account can process credit transactions.
- * @constant CFTMerchantAccountCapabilityCanAdjustTransactions Transactions can be adjusted.
- * @constant CFTMerchantAccountCapabilityCanDeferTransactions Merchant account can defer transactions.
- * @constant CFTMerchantAccountCapabilityCanProcessDebit Merchant account can process debit transactions.
- */
-typedef NS_ENUM(NSInteger, CFTMerchantAccountCapability) {
-    CFTMerchantAccountCapabilityCanProcessCredit NS_SWIFT_NAME(merchantAccountCanProcessCredit) = 0,
-    CFTMerchantAccountCapabilityCanAdjustTransactions NS_SWIFT_NAME(merchantAccountCanAdjustTransactions) = 1,
-    CFTMerchantAccountCapabilityCanDeferTransactions NS_SWIFT_NAME(merchantAccountCanDeferTransactions) = 2,
-    CFTMerchantAccountCapabilityCanProcessDebit NS_SWIFT_NAME(merchantAccountCanProcessDebit) = 3
-};
-
-/*!
- * @typedef CFTTransactionCapability
- * @brief Transaction capabilities
- * @constant CFTTransactionCapabilityCanBeRefundedWithCardInput Transaction can refund with card input.
- * @constant CFTTransactionCapabilityCanBeRefundedWithoutCardInput Transaction can refund without card input.
- */
-typedef NS_ENUM(NSInteger, CFTTransactionCapability) {
-    CFTTransactionCapabilityCanBeRefundedWithCardInput NS_SWIFT_NAME(transactionCanBeRefundedWithCardInput) = 0,
-    CFTTransactionCapabilityCanBeRefundedWithoutCardInput NS_SWIFT_NAME(transactionCanBeRefundedWithoutCardInput) = 1,
-    CFTTransactionCapabilityCanBeVoided NS_SWIFT_NAME(transactionCanBeVoided) = 2
-};
-
-/*!
- * @typedef CFTDeviceManagerCapability
- * @brief Device's capabilities
- * @constant CFTDeviceManagerCapabilityHasIntegratedKeypad Device has integrated keypad.
- */
-typedef NS_ENUM(NSInteger, CFTDeviceManagerCapability) {
-    CFTDeviceManagerCapabilityHasIntegratedKeypad NS_SWIFT_NAME(deviceHasIntegratedKeypad) = 0
-};
-    
-/*!
- * @typedef CFTNetworkType
- * @brief Network type for a transaction
- * @constant CFTNetworkTypeUnknown Transaction is processed over an unknown network.
- * @constant CFTNetworkTypeCredit Transaction is processed over the credit network.
- * @constant CFTNetworkTypeDebit Transaction is processed over the debit network.
- */
-typedef NS_ENUM(NSInteger, CFTNetworkType) {
-    CFTNetworkTypeUnknown NS_SWIFT_NAME(unknown) = 0,
-    CFTNetworkTypeCredit NS_SWIFT_NAME(credit) = 1,
-    CFTNetworkTypeDebit NS_SWIFT_NAME(debit) = 2
-};
-
-/*!
- * @typedef CFTMerchantAccountSettlementScheme
- * @brief Settlement scheme for a merchant account
- * @constant CFTMerchantAccountSettlementSchemeUnknown Unknown settlement scheme.
- * @constant CFTMerchantAccountSettlementSchemeBroadPosAuto Auto settlement scheme from BroadPOS.
- * @constant CFTMerchantAccountSettlementSchemeBroadPosManual Manual settlement scheme from BroadPOS.
- * @constant CFTMerchantAccountSettlementSchemeHostAuto Auto settlement scheme from Host.
- * @constant CFTMerchantAccountSettlementSchemeGatewayAuto Auto settlement scheme from Gateway.
- */
-typedef NS_ENUM(NSInteger, CFTMerchantAccountSettlementScheme) {
-    CFTMerchantAccountSettlementSchemeUnknown = 0,
-    CFTMerchantAccountSettlementSchemeBroadPosAuto = 1,
-    CFTMerchantAccountSettlementSchemeBroadPosManual = 2,
-    CFTMerchantAccountSettlementSchemeHostAuto = 3,
-    CFTMerchantAccountSettlementSchemeGatewayAuto = 4
-};

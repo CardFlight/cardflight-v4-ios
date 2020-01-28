@@ -11,9 +11,7 @@
 
 @class CFTCredentials;
 @class CFTAmount;
-@class CFTMerchantAccount;
 
-DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.8.1. Use `CFTTransactionManager` to create transaction without `CFTTransactionParameters`.")
 @interface CFTTransactionParameters : NSObject
 
 /*!
@@ -28,15 +26,7 @@ DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.8.1. Use `CFTTransactionManager` to cr
  * @brief Credentials to use for processing
  * Added in 4.0.0
  */
-@property (nonatomic, readonly, strong, nullable) CFTCredentials *credentials
-DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.7.0. Use `merchantAccount` instead");
-
-/*!
- * @property merchant account
- * @brief MerchantAccount to use for processing
- * Added in 4.7.0
- */
-@property (nonatomic, readonly, strong, nonnull) CFTMerchantAccount *merchantAccount;
+@property (nonatomic, readonly, strong, nonnull) CFTCredentials *credentials;
 
 /*!
  * @property callbackUrl
@@ -47,19 +37,11 @@ DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.7.0. Use `merchantAccount` instead");
 
 /*!
  * @property requireSignature
- * @brief The boolean for requesting a signature is only honored for keyed and swiped transactions.
+ * @brief The boolean for requesting a signature is only honored for keyed and swiped transactions. 
  * The CardFlight Gateway decides whether to request a signature for all other card input methods used.
  * Added in 4.0.0
  */
 @property (nonatomic, readwrite, assign) BOOL requireSignature;
-
-/*!
- * @property isQuickChipEnabled
- * @brief The boolean is for weather or not quick chip is enabled.
- * Added in 4.8.0
- */
-@property (nonatomic, readwrite, assign) BOOL isQuickChipEnabled;
-
 
 /*!
  * @property metadata
@@ -78,19 +60,7 @@ DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.7.0. Use `merchantAccount` instead");
  * Added in 4.0.0
  */
 + (nonnull instancetype)parametersWithAmount:(nonnull CFTAmount *)amount
-                                 credentials:(nonnull CFTCredentials *)credentials
-DEPRECATED_MSG_ATTRIBUTE("Deprecated as of 4.7.0. Use `parametersWithAmount` instead");
-
-/*!
- * @brief Convenience initializer for a CFTTransactionParameters object
- * @param amount CFTAmount
- * @param merchantAccount CFTMerchantAccount
- * @return CFTTransactionParameters - The initalized CFTTransactionParameters object
- * @discussion Will construct a new CFTTransactionParameters object using amount provided.
- * Added in 4.7.0
- */
-+ (nonnull instancetype)parametersWithAmount:(nonnull CFTAmount *)amount
-                             merchantAccount:(nonnull CFTMerchantAccount *)merchantAccount;
+                                 credentials:(nonnull CFTCredentials *)credentials;
 
 /*!
  * @brief Initialize a CFTTransactionParameters object
@@ -102,19 +72,6 @@ DEPRECATED_MSG_ATTRIBUTE("Deprecated as of 4.7.0. Use `parametersWithAmount` ins
  */
 - (nonnull instancetype)initWithAmount:(nonnull CFTAmount *)amount
                            credentials:(nonnull CFTCredentials *)credentials
-NS_SWIFT_NAME(init(amount:credentials:))
-DEPRECATED_MSG_ATTRIBUTE("Deprecated as of 4.7.0. Use `initWithAmount` instead");
-
-/*!
- * @brief Initialize a CFTTransactionParameters object
- * @param amount CFTAmount
- * @param merchantAccount CFTMerchantAccount
- * @return CFTTransactionParameters - The initalized CFTTransactionParameters object
- * @discussion Will construct a new CFTTransactionParameters object using amount provided.
- * Added in 4.7.0
- */
-- (nonnull instancetype)initWithAmount:(nonnull CFTAmount *)amount
-                       merchantAccount:(nonnull CFTMerchantAccount *)merchantAccount
-NS_SWIFT_NAME(init(amount:merchantAccount:));
+NS_SWIFT_NAME(init(amount:credentials:));
 
 @end

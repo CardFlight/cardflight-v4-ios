@@ -18,20 +18,19 @@
 @class CFTCredentials;
 @class CFTAvsResponse;
 
-DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.7.0. Use `CFTTransactionRecord` instead")
 @interface CFTHistoricalTransaction : NSObject
 
 /*!
  * @brief Retrieve the historical transaction for a charge token
  * @param chargeId NSString - Charge token used to retrieve the transaction
- * @param completion CFTLegacyTransactionBlock - Block to handle the result, contains the retrieved CFTHistoricalTransaction
+ * @param completion CFTTransactionBlock - Block to handle the result, contains the retrieved CFTHistoricalTransaction
  * if successful. On failure, contains an NSError describing the error that occurred.
  * @discussion Retrieves a historical transaction by querying the Cardflight API
  * Added in 4.2.0
  */
 + (void)retrieveFromChargeId:(nonnull NSString *)chargeId
                                  credentials:(nonnull CFTCredentials *)credentials
-                                  completion:(nonnull CFTLegacyTransactionBlock)completion
+                                  completion:(nonnull CFTTransactionBlock)completion
 NS_SWIFT_NAME(retrieve(chargeId:credentials:completion:));
 
 /*!
@@ -70,6 +69,20 @@ NS_SWIFT_NAME(retrieve(chargeId:credentials:completion:));
 @property (nonatomic, readonly, strong, nullable) NSError *error;
 
 /*!
+ * @property signatureUrl
+ * @brief URL of the signature data
+ * Added in 4.0.0
+ */
+@property (nonatomic, readonly, strong, nullable) NSURL *signatureUrl;
+
+/*!
+ * @property cardReaderInfo
+ * @brief Card Reader Info used by the Transaction
+ * Added in 4.0.0
+ */
+@property (nonatomic, readonly, strong, nullable) CFTCardReaderInfo *cardReaderInfo;
+
+/*!
  * @property cardInfo
  * @brief Card Info used by the Transaction
  * Added in 4.0.0
@@ -106,6 +119,13 @@ NS_SWIFT_NAME(retrieve(chargeId:credentials:completion:));
 @property (nonatomic, readonly, copy, nullable) NSString *referenceId;
 
 /*!
+ * @property transactionState
+ * @brief Current state of the transaction
+ * Added in 4.1.0
+ */
+@property (nonatomic, readonly) CFTApiTransactionStatus apiTransactionState;
+
+/*!
  * @property transactionParameters
  * @brief Transaction Parameters used by the Transaction
  * Added in 4.0.0
@@ -120,39 +140,11 @@ NS_SWIFT_NAME(retrieve(chargeId:credentials:completion:));
 @property (nonatomic, readonly, assign) CFTTransactionType transactionType;
 
 /*!
- * @property cardReaderInfo
- * @brief Card Reader Info used by the Transaction
- * Added in 4.0.0
- */
-@property (nonatomic, readonly, strong, nullable) CFTCardReaderInfo *cardReaderInfo;
-
-/*!
- * @property signatureUrl
- * @brief URL of the signature data
- * Added in 4.0.0
- */
-@property (nonatomic, readonly, strong, nullable) NSURL *signatureUrl;
-
-/*!
- * @property transactionState
- * @brief Current state of the transaction
- * Added in 4.1.0
- */
-@property (nonatomic, readonly) CFTApiTransactionStatus apiTransactionState;
-
-/*!
  * @property avsResponse
  * @brief Avs result of the transaction
  * Added in 4.5.0
  */
 @property (nonatomic, readonly, strong, nullable) CFTAvsResponse *avsResponse;
-
-/*!
- * @property authCodes
- * @brief AuthCodes of a transaction.
- * Added in 4.7.0
- */
-@property (nonatomic, readonly, strong, nullable) NSArray<NSString *> *authCodes;
 
 /*!
  * @brief Refresh the historical transaction
@@ -189,14 +181,14 @@ NS_SWIFT_NAME(captureTransaction(amount:completion:));
 /*!
  * @brief Refund an amount
  * @param amount CFTAmount - Amount to refund
- * @param completion CFTLegacyTransactionBlock - Block to handle the result of the refund, contains CFTHistoricalTransaction and NSError
+ * @param completion CFTTransactionBlock - Block to handle the result of the refund, contains CFTHistoricalTransaction and NSError
  * @discussion Will attempt to refund with the specified amount against the current transaction. Upon completion,
  * the completion block is triggered indicating the refund attempt has finished and potentially an error if the
  * refund did not complete successfully
  * Added in 4.0.0
  */
 - (void)refundTransactionWithAmount:(nonnull CFTAmount *)amount
-                         completion:(nullable CFTLegacyTransactionBlock)completion
+                         completion:(nullable CFTTransactionBlock)completion
 NS_SWIFT_NAME(refundTransaction(amount:completion:));
 
 @end

@@ -11,7 +11,6 @@
 #import "CFTEnum.h"
 #import "CFTConstants.h"
 
-DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.7.0. Use `CFTMerchantAccount` instead")
 @interface CFTCredentials : NSObject
 
 /*!
@@ -55,20 +54,6 @@ DEPRECATED_MSG_ATTRIBUTE("Deprecated in 4.7.0. Use `CFTMerchantAccount` instead"
  * Added in 4.0.0
  */
 @property (nonatomic, readonly, copy, nullable) NSString *merchantAccountName;
-
-/*!
- * @property mid
- * @brief Merchant account id.
- * Added in 4.7.0
- */
-@property (nonatomic, readonly, copy, nullable) NSString *mid;
-
-/*!
- * @property tid
- * @brief Terminal id.
- * Added in 4.7.0
- */
-@property (nonatomic, readonly, copy, nullable) NSString *tid;
 
 /*!
  * @brief Private method
